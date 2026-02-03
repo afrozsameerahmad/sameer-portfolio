@@ -37,12 +37,13 @@ function Home() {
               </a>
 
               <a
-                href="https://sameer-portfolio-backend.onrender.com/media/resumes/..."
-                target="_blank"
-                rel="noreferrer"
-              >
-                <button>Download CV</button>
-              </a>
+  href="/resume.pdf"
+  download
+  className="btn"
+>
+  Download CV
+</a>
+
             </div>
           </div>
 

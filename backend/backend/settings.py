@@ -8,9 +8,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY
 SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-secret-key")
 
-DEBUG = True   # Abhi deploy ke liye True rakho
+DEBUG = False    
 
-ALLOWED_HOSTS = ["*"]
+DEBUG = False
+
+ALLOWED_HOSTS = [
+    "sameerahmad-portfolio.onrender.com",
+    "sameer-portfolio-eight-orcin.vercel.app"
+]
+
 
 
 # APPS
@@ -44,7 +50,10 @@ MIDDLEWARE = [
 
 
 # CORS
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://sameer-portfolio-eight-orcin.vercel.app"
+]
+
 CORS_ALLOW_HEADERS = list(default_headers)
 
 
