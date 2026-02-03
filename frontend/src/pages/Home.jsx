@@ -31,20 +31,16 @@ function Home() {
               that create real impact.
             </p>
 
-            <div className="home-buttons">
-              <a href="/contact">
-                <button>Contact Me</button>
-              </a>
+           <div className="home-buttons">
+  <a href="/contact" className="btn">
+    Contact Me
+  </a>
 
-              <a
-  href="/resume.pdf"
-  download
-  className="btn"
->
-  Download CV
-</a>
+  <a href="/resume.pdf" download className="btn">
+    Download CV
+  </a>
+</div>
 
-            </div>
           </div>
 
           <motion.div
