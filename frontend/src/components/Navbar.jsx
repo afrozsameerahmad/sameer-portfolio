@@ -1,24 +1,25 @@
-import { useContext } from "react";
-import { ThemeContext } from "../context/ThemeContext";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import "./Navbar.css";
 
-export default function Navbar() {
-  const { dark, setDark } = useContext(ThemeContext);
-
+function Navbar() {
   return (
-    <nav className="navbar">
-      <h2>Sameer | Data Scientist</h2>
+    <>
+      <nav className="navbar">
+        <h2 className="logo">Sameer</h2>
 
-      <div>
-           <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/projects">Projects</a>
-    <a href="/contact">Contact</a>
-
-        <button onClick={() => setDark(!dark)}>
-          {dark ? <FaSun /> : <FaMoon />}
-        </button>
-      </div>
-    </nav>
+        <ul className="nav-links">
+          <li><NavLink to="/">Home</NavLink></li>
+          <li><NavLink to="/about">About</NavLink></li>
+          <li><NavLink to="/skills">Skills</NavLink></li>
+          <li><NavLink to="/experience">Experience</NavLink></li>
+          <li><NavLink to="/projects">Projects</NavLink></li>
+          <li><NavLink to="/certificates">Certificates</NavLink></li>
+          <li><NavLink to="/blog">Blog</NavLink></li>
+          <li><NavLink to="/contact">Contact</NavLink></li>
+        </ul>
+      </nav>
+    </>
   );
 }
+
+export default Navbar;

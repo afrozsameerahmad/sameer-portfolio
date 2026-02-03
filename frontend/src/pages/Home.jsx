@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Typewriter } from "react-simple-typewriter";
 
 import profileImg from "../assets/profile.png";
 import salesForecastImg from "../assets/sales_forecast.png";
@@ -24,12 +25,16 @@ function Home() {
             <h1>
               Hi, I’m <span>Sameer Ahmad</span>
             </h1>
-            <h2>Data Scientist</h2>
+            <h2>
+  <Typewriter
+    words={["Data Scientist", "ML Engineer", "Python Developer"]}
+    loop
+    cursor
+    typeSpeed={80}
+    deleteSpeed={50}
+  />
+</h2>
 
-            <p>
-              I turn raw data into actionable insights and build ML solutions
-              that create real impact.
-            </p>
 
            <div className="home-buttons">
   <a href="/contact" className="btn">
@@ -94,23 +99,33 @@ function Home() {
       </section>
 
       {/* PROJECTS */}
-      const projects = [
-  {
-    title: "📈 Sales Forecasting",
-    img: salesForecastImg,
-    github: "https://github.com/...",
-    demo: "https://...",
-    desc: "ML model for sales prediction"
-  },
-  {
-    title: "🌐 ML Deployment",
-    img: mlDeployImg,
-    github: "https://github.com/...",
-    demo: "https://...",
-    desc: "Deployed ML using Django"
-  }
-];
+      <section className="section projects">
+        <h2>Featured Projects</h2>
 
+        <div className="project-grid">
+          {[salesForecastImg, mlDeployImg].map((img, i) => (
+            <motion.div
+              key={i}
+              className="project-card"
+              whileHover={{ y: -10 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: i * 0.3 }}
+            >
+              <img src={img} alt="Project" />
+
+              <h3>{i === 0 ? "📈 Sales Forecasting" : "🌐 ML Deployment"}</h3>
+
+              <p>Real-world ML system</p>
+
+              <div className="links">
+                <a href="#">View</a>
+                <a href="#">GitHub</a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       {/* TECH STACK */}
       <section className="section tech-stack">
