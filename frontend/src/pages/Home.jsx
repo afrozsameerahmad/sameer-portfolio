@@ -62,9 +62,9 @@ function Home() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <h3>🎯 3 Data Science Internships</h3>
-          <h3>📊 Real Sales Forecasting Projects</h3>
-          <h3>🚀 Deployed ML Models</h3>
+          <h3> 3 Data Science Internships</h3>
+          <h3> Real Sales Forecasting Projects</h3>
+          <h3> Deployed ML Models</h3>
         </motion.div>
       </section>
 
@@ -94,33 +94,23 @@ function Home() {
       </section>
 
       {/* PROJECTS */}
-      <section className="section projects">
-        <h2>Featured Projects</h2>
+      const projects = [
+  {
+    title: "📈 Sales Forecasting",
+    img: salesForecastImg,
+    github: "https://github.com/...",
+    demo: "https://...",
+    desc: "ML model for sales prediction"
+  },
+  {
+    title: "🌐 ML Deployment",
+    img: mlDeployImg,
+    github: "https://github.com/...",
+    demo: "https://...",
+    desc: "Deployed ML using Django"
+  }
+];
 
-        <div className="project-grid">
-          {[salesForecastImg, mlDeployImg].map((img, i) => (
-            <motion.div
-              key={i}
-              className="project-card"
-              whileHover={{ y: -10 }}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: i * 0.3 }}
-            >
-              <img src={img} alt="Project" />
-
-              <h3>{i === 0 ? "📈 Sales Forecasting" : "🌐 ML Deployment"}</h3>
-
-              <p>Real-world ML system</p>
-
-              <div className="links">
-                <a href="#">View</a>
-                <a href="#">GitHub</a>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
 
       {/* TECH STACK */}
       <section className="section tech-stack">
