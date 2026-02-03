@@ -1,17 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include
-from django.http import JsonResponse
-
+from django.http import HttpResponse
 
 def home(request):
-    return JsonResponse({
-        "status": "OK",
-        "message": "Backend is running 🚀"
-    })
-
+    return HttpResponse("Backend is running")
 
 urlpatterns = [
-    path('', home),          # 👈 root fix
-    path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
+    path("", home),   # 👈 ADD THIS
+    path("admin/", admin.site.urls),
+    path("api/", include("api.urls")),
 ]
