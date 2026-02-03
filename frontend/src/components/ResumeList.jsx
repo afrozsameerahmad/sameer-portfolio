@@ -1,12 +1,12 @@
+import API from "../api";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 export default function ResumeList() {
   const [resumes, setResumes] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/resume/") // your Django API
+      API.get("resume/") // your Django API
       .then((res) => setResumes(res.data))
       .catch((err) => console.log(err));
   }, []);

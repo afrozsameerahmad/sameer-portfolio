@@ -1,5 +1,5 @@
+import API from "../api";
 import { useState } from "react";
-import axios from "axios";
 
 function Contact() {
 
@@ -22,7 +22,7 @@ function Contact() {
     e.preventDefault();
 
     try {
-      await axios.post("http://127.0.0.1:8000/api/contact/", form);
+      await API.post("contact/", form);
 
       setStatus("Message sent successfully ✅");
 
