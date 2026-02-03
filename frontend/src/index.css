@@ -47,9 +47,9 @@ a {
   color: #38bdf8;
 }
 
-/* ================= MAIN CONTENT (OVERLAP FIX) ================= */
+/* ================= MAIN CONTENT ================= */
 .main-content {
-  padding-top: 100px; /* navbar overlap fix */
+  padding-top: 100px;
 }
 
 /* ================= HOME ================= */
@@ -138,7 +138,7 @@ a {
 .about {
   max-width: 1100px;
   margin: auto;
-  padding-top: 40px; /* overlap fix */
+  padding-top: 40px;
 }
 
 .about-container {
@@ -148,18 +148,25 @@ a {
   margin-top: 30px;
 }
 
-.about-text h3 {
-  font-size: 26px;
+/* ABOUT TEXT */
+.about-text h3,
+.about-text h1 {
+  font-size: 28px;
   margin-bottom: 15px;
 }
 
 .about-text p {
   line-height: 1.7;
   margin-bottom: 15px;
-  color: #cbd5f5; /* dark theme readable */
+  color: #cbd5f5;
+  transition: color 0.3s ease;
 }
 
-/* About Info Boxes */
+.about-text p:hover {
+  color: #e5e7eb;
+}
+
+/* ABOUT INFO CARDS (INTERACTIVE) */
 .about-info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -170,10 +177,18 @@ a {
 .about-info div {
   background: #111;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
-/* Skills */
+.about-info div:hover {
+  transform: translateY(-6px);
+  border-color: #38bdf8;
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+}
+
+/* ABOUT SKILLS */
 .about-skills h3 {
   font-size: 24px;
   margin-bottom: 15px;
@@ -191,11 +206,35 @@ a {
   padding: 8px 14px;
   border-radius: 20px;
   font-size: 14px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  border: 1px solid #1e293b;
 }
 
 .skills-grid span:hover {
-  background: #4f46e5;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  transform: scale(1.12);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
+}
+
+/* ================= BUTTON ================= */
+.btn {
+  padding: 10px 22px;
+  background: #2563eb;
+  color: white;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+.about-btn {
+  margin-top: 20px;
 }
 
 /* ================= CONTACT ================= */
@@ -227,20 +266,6 @@ a {
   color: #94a3b8;
 }
 
-/* ================= BUTTON ================= */
-.btn {
-  padding: 10px 22px;
-  background: #2563eb;
-  color: white;
-  border-radius: 6px;
-  font-weight: 500;
-  display: inline-block;
-}
-
-.btn:hover {
-  background: #1d4ed8;
-}
-
 /* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
   .home-container {
@@ -269,6 +294,56 @@ a {
   }
 
   .page {
-    padding-top: 120px; /* mobile overlap safety */
+    padding-top: 120px;
   }
+}
+.experience {
+  max-width: 900px;
+  margin: auto;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 30px;
+  border-left: 3px solid #444;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -11px;
+  top: 10px;
+  width: 18px;
+  height: 18px;
+  background: #00ffd5;
+  border-radius: 50%;
+}
+
+.timeline-content {
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.timeline-content h3 {
+  margin: 0;
+  color: #00ffd5;
+}
+
+.timeline-content h4 {
+  margin: 5px 0;
+  color: #aaa;
+}
+
+.timeline-content ul {
+  padding-left: 20px;
 }
