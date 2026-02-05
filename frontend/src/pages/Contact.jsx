@@ -25,13 +25,16 @@ function Contact() {
     setSuccess("");
 
     try {
-      const res = await fetch("https://sameer-portfolio-backend.onrender.com/api/contact/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
+      const res = await fetch(
+        "https://sameer-portfolio-backend.onrender.com/api/contact/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        }
+      );
 
       if (res.ok) {
         setSuccess("✅ Message sent successfully!");
@@ -48,17 +51,18 @@ function Contact() {
 
   return (
     <motion.section
-      className="section contact-page"
+      className="section contact"   // ✅ CSS ke saath match
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
     >
-      <h2>Contact Me</h2>
+      <h1>Contact Me</h1>
 
-      <p className="contact-subtitle">
+      <p>
         Let’s connect and build something great 🚀
       </p>
 
-      <form className="contact-form" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
 
         <input
           name="name"
@@ -85,7 +89,7 @@ function Contact() {
           required
         />
 
-        <button disabled={loading}>
+        <button className="btn" disabled={loading}>
           {loading ? "Sending..." : "Send Message"}
         </button>
 

@@ -1,80 +1,80 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
+import salesImg from "../assets/sales_forecast.png";
+import mlImg from "../assets/ml_deploy.png";
+
 function Projects() {
-  const [projects, setProjects] = useState([]);
 
-  useEffect(() => {
-    fetch("https://sameer-portfolio-backend.onrender.com/api/projects/")
+  const projects = [
+    {
+      title: "Sales Forecasting System",
+      desc: "ML-based sales prediction using Python & ML models",
+      img: salesImg,
+      github: "https://github.com/afrozsameerahmad/sales-forecast",
+      live: "https://sales-forecast-demo.vercel.app",
+    },
 
-
-      .then((res) => res.json())
-      .then((data) => setProjects(data))
-      .catch(() => console.log("Backend not connected"));
-  }, []);
+    {
+      title: "ML Model Deployment",
+      desc: "Deployed ML model using Django & React",
+      img: mlImg,
+      github: "https://github.com/afrozsameerahmad/ml-deploy",
+      live: "https://ml-deploy-demo.vercel.app",
+    },
+  ];
 
   return (
     <motion.section
-      className="section projects-page"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      className="section page"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
     >
-      <h2>My Projects</h2>
+      <h1 className="page-title">Projects</h1>
 
-      <div className="projects-grid">
-
-        {projects.length === 0 && (
-          <p style={{ textAlign: "center" }}>
-            Loading projects...
-          </p>
-        )}
+      <div className="cards-container">
 
         {projects.map((p, i) => (
+
           <motion.div
-            key={p.id}
-            className="project-card"
-            whileHover={{ y: -10 }}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
+            key={i}
+            className="card project-card"
+            whileHover={{ scale: 1.05 }}
           >
+
+            <img src={p.img} alt={p.title} className="project-img" />
+
             <h3>{p.title}</h3>
 
-            <p className="project-desc">
-              {p.description}
-            </p>
-
-            <div className="project-tech">
-              {p.tech_stack.split(",").map((t, i) => (
-                <span key={i}>{t.trim()}</span>
-              ))}
-            </div>
+            <p>{p.desc}</p>
 
             <div className="project-links">
-              {p.github_link && (
-                <a
-                  href={p.github_link}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  GitHub
-                </a>
-              )}
 
-              {p.live_link && (
-                <a
-                  href={p.live_link}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Live Demo
-                </a>
-              )}
+              <a
+                href={p.github}
+                target="_blank"
+                rel="noreferrer"
+                className="btn"
+              >
+                GitHub
+              </a>
+
+              <a
+                href={p.live}
+                target="_blank"
+                rel="noreferrer"
+                className="btn"
+              >
+                Live Demo
+              </a>
+
             </div>
+
           </motion.div>
+
         ))}
 
       </div>
+
     </motion.section>
   );
 }
