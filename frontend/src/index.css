@@ -285,7 +285,6 @@ a {
   .about-container {
     grid-template-columns: 1fr;
     text-align: center;
-    
   }
 
   .home-text p {
@@ -305,16 +304,5 @@ a {
 
   .page-title {
     font-size: 26px;
-  }
-}
-@media (max-width: 900px) {
-  .main-content {
-    padding-top: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-content {
-    padding-top: 10px;
   }
 }
