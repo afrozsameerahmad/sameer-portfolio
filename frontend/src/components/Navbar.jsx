@@ -8,10 +8,12 @@ function Navbar() {
   return (
     <nav className="navbar">
 
-      {/* LOGO */}
-      <h2 className="logo">Sameer</h2>
+      {/* LEFT */}
+      <div className="nav-left">
+        <h2 className="logo">Sameer</h2>
+      </div>
 
-      {/* HAMBURGER ICON */}
+      {/* RIGHT ICON */}
       <div
         className="menu-icon"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -20,39 +22,16 @@ function Navbar() {
       </div>
 
       {/* LINKS */}
-      <ul className={menuOpen ? "nav-links active" : "nav-links"}>
+      <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
 
-        <li onClick={() => setMenuOpen(false)}>
-          <NavLink to="/">Home</NavLink>
-        </li>
-
-        <li onClick={() => setMenuOpen(false)}>
-          <NavLink to="/about">About</NavLink>
-        </li>
-
-        <li onClick={() => setMenuOpen(false)}>
-          <NavLink to="/skills">Skills</NavLink>
-        </li>
-
-        <li onClick={() => setMenuOpen(false)}>
-          <NavLink to="/experience">Experience</NavLink>
-        </li>
-
-        <li onClick={() => setMenuOpen(false)}>
-          <NavLink to="/projects">Projects</NavLink>
-        </li>
-
-        <li onClick={() => setMenuOpen(false)}>
-          <NavLink to="/certifications">Certificates</NavLink>
-        </li>
-
-        <li onClick={() => setMenuOpen(false)}>
-          <NavLink to="/blog">Blog</NavLink>
-        </li>
-
-        <li onClick={() => setMenuOpen(false)}>
-          <NavLink to="/contact">Contact</NavLink>
-        </li>
+        <li><NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink></li>
+        <li><NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink></li>
+        <li><NavLink to="/skills" onClick={() => setMenuOpen(false)}>Skills</NavLink></li>
+        <li><NavLink to="/experience" onClick={() => setMenuOpen(false)}>Experience</NavLink></li>
+        <li><NavLink to="/projects" onClick={() => setMenuOpen(false)}>Projects</NavLink></li>
+        <li><NavLink to="/certifications" onClick={() => setMenuOpen(false)}>Certificates</NavLink></li>
+        <li><NavLink to="/blog" onClick={() => setMenuOpen(false)}>Blog</NavLink></li>
+        <li><NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink></li>
 
       </ul>
 

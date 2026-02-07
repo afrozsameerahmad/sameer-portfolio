@@ -1,4 +1,5 @@
 /* ================= RESET ================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +8,7 @@
 }
 
 /* ================= GLOBAL ================= */
+
 body {
   background: #0f172a;
   color: #e5e7eb;
@@ -30,94 +32,14 @@ a {
   font-size: 32px;
 }
 
-/* ================= NAVBAR ================= */
-/* NAVBAR BASE */
-
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background: #000;
-  color: white;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-/* LINKS */
-
-.nav-links {
-  display: flex;
-  gap: 25px;
-  list-style: none;
-}
-
-.nav-links li a {
-  text-decoration: none;
-  color: white;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.nav-links li a:hover,
-.nav-links li a.active {
-  color: #00ffd5;
-}
-
-/* HAMBURGER */
-
-.menu-icon {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-/* ---------------- MOBILE ---------------- */
-
-@media (max-width: 768px) {
-
-  .menu-icon {
-    display: block;
-  }
-
-  .nav-links {
-    position: absolute;
-    top: 65px;
-    left: 0;
-    width: 100%;
-    background: #000;
-    flex-direction: column;
-    align-items: center;
-
-    max-height: 0;
-    overflow: hidden;
-
-    transition: 0.3s ease-in-out;
-  }
-
-  .nav-links.active {
-    max-height: 500px;
-    padding: 20px 0;
-  }
-
-  .nav-links li {
-    margin: 12px 0;
-  }
-}
-
-
 /* ================= MAIN CONTENT ================= */
+
 .main-content {
-  padding-top: 90px;
+  padding-top: 80px;
 }
 
 /* ================= BUTTON ================= */
+
 .btn {
   padding: 10px 22px;
   background: #2563eb;
@@ -133,6 +55,7 @@ a {
 }
 
 /* ================= HOME ================= */
+
 .home-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -175,22 +98,13 @@ a {
   border: 4px solid #38bdf8;
 }
 
-/* ================= PROOF ================= */
-.proof-strip {
-  display: flex;
-  justify-content: space-around;
-  background: #020617;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
 /* ================= CARDS ================= */
+
 .cards-container,
 .cert-grid,
-.project-grid {
+.project-grid,
+.skills-grid,
+.blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 25px;
@@ -198,22 +112,26 @@ a {
 
 .card,
 .cert-card,
-.project-card {
+.project-card,
+.skill-card,
+.blog-card {
   background: #020617;
   padding: 25px;
   border-radius: 12px;
-  transition: 0.3s;
   text-align: center;
+  transition: 0.3s;
 }
 
 .card:hover,
 .cert-card:hover,
-.project-card:hover {
+.project-card:hover,
+.blog-card:hover {
   transform: translateY(-8px);
   border: 1px solid #38bdf8;
 }
 
 /* ================= ABOUT ================= */
+
 .about-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -230,12 +148,6 @@ a {
   line-height: 1.7;
 }
 
-.skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
 .skill-badge {
   background: #111;
   padding: 8px 14px;
@@ -244,6 +156,7 @@ a {
 }
 
 /* ================= CONTACT ================= */
+
 .contact {
   max-width: 500px;
   margin: auto;
@@ -274,6 +187,7 @@ a {
 }
 
 /* ================= EXPERIENCE ================= */
+
 .experience {
   max-width: 900px;
   margin: auto;
@@ -305,7 +219,57 @@ a {
   border-radius: 10px;
 }
 
+/* ================= PROJECT ================= */
+
+.project-img,
+.cert-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.project-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+/* ================= SKILLS ================= */
+
+.skill-card h3 {
+  color: #00ffd5;
+  margin-bottom: 12px;
+}
+
+.skill-card ul {
+  list-style: none;
+}
+
+.skill-card li {
+  margin: 8px 0;
+}
+
+/* ================= BLOG ================= */
+
+.blog-card h3 {
+  margin-bottom: 10px;
+}
+
+.blog-card p {
+  color: #bbb;
+}
+
+.blog-card a {
+  margin-top: 15px;
+  display: inline-block;
+  color: #00ffd5;
+  font-weight: bold;
+}
+
 /* ================= FOOTER ================= */
+
 .footer {
   text-align: center;
   padding: 30px;
@@ -314,11 +278,14 @@ a {
 }
 
 /* ================= RESPONSIVE ================= */
+
 @media (max-width: 900px) {
+
   .home-container,
   .about-container {
     grid-template-columns: 1fr;
     text-align: center;
+    
   }
 
   .home-text p {
@@ -330,24 +297,8 @@ a {
   }
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px 20px;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .section {
-    padding: 120px 15px 60px;
-  }
-}
-
 @media (max-width: 480px) {
+
   .home-text h1 {
     font-size: 32px;
   }
@@ -356,132 +307,14 @@ a {
     font-size: 26px;
   }
 }
-/* ================= PROJECT PAGE ================= */
-
-.project-card h3 {
-  margin-bottom: 10px;
-  color: #38bdf8;
+@media (max-width: 900px) {
+  .main-content {
+    padding-top: 10px;
+  }
 }
 
-.project-card p {
-  font-size: 14px;
-  margin-bottom: 12px;
-  color: #cbd5f5;
-}
-
-.project-card span {
-  font-size: 13px;
-  color: #94a3b8;
-}
-
-.project-links {
-  margin-top: 15px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-/* ================= CERTIFICATIONS ================= */
-
-.cert-card {
-  text-decoration: none;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.cert-img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #333;
-}
-
-.cert-card small {
-  color: #38bdf8;
-  font-size: 13px;
-}
-/* ================= PROJECTS ================= */
-
-.project-img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.project-links {
-  display: flex;
-  gap: 12px;
-  margin-top: 15px;
-  justify-content: center;
-}
-/* SKILLS + BLOG COMMON */
-
-.subtitle {
-  text-align: center;
-  margin-bottom: 40px;
-  color: gray;
-}
-
-/* SKILLS */
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-}
-
-.skill-card {
-  background: #111;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-}
-
-.skill-card h3 {
-  margin-bottom: 15px;
-  color: #00ffd5;
-}
-
-.skill-card ul {
-  list-style: none;
-  padding: 0;
-}
-
-.skill-card li {
-  margin: 8px 0;
-}
-
-
-/* BLOG */
-
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-}
-
-.blog-card {
-  background: #111;
-  padding: 25px;
-  border-radius: 12px;
-  transition: 0.3s;
-}
-
-.blog-card h3 {
-  margin-bottom: 10px;
-}
-
-.blog-card p {
-  color: #bbb;
-}
-
-.blog-card a {
-  display: inline-block;
-  margin-top: 15px;
-  color: #00ffd5;
-  font-weight: bold;
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 10px;
+  }
 }
