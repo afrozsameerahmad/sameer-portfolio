@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import Resume, ContactMessage
-from .models import Project
+from .models import Resume, Contact, Project
+
 
 class ResumeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,11 +8,10 @@ class ResumeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ContactMessageSerializer(serializers.ModelSerializer):
+class ContactSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ContactMessage
+        model = Contact
         fields = "__all__"
-
 
 
 class ProjectSerializer(serializers.ModelSerializer):

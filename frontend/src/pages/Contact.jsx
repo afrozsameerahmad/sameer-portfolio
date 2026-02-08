@@ -22,6 +22,9 @@ function Contact() {
   const [status, setStatus] = useState({ type: "", message: "" });
   const [loading, setLoading] = useState(false);
 
+  // Use environment variable or fallback to production URL
+  const API_URL = import.meta.env.VITE_API_URL || "https://sameer-portfolio-backend.onrender.com";
+
   const contactInfo = [
     {
       icon: Mail,
@@ -84,37 +87,63 @@ function Contact() {
       return;
     }
 
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) {
+      setStatus({ 
+        type: "error", 
+        message: "Please enter a valid email address." 
+      });
+      return;
+    }
+
     setLoading(true);
     setStatus({ 
       type: "info", 
-      message: "⏳ Server is starting up (this may take 30-60 seconds)..." 
+      message: "⏳ Sending your message..." 
     });
 
     // Create abort controller for timeout
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout
 
     try {
-      const res = await fetch(
-        "https://sameer-portfolio-backend.onrender.com/api/contact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(form),
-          signal: controller.signal,
-        }
-      );
+      console.log("Sending to:", `${API_URL}/api/contact/`);
+      console.log("Form data:", form);
+
+      const res = await fetch(`${API_URL}/api/contact/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          message: form.message.trim(),
+        }),
+        signal: controller.signal,
+      });
 
       clearTimeout(timeoutId);
 
-      const data = await res.json();
+      console.log("Response status:", res.status);
+
+      // Parse response
+      let data;
+      try {
+        data = await res.json();
+      } catch (parseError) {
+        console.error("JSON parse error:", parseError);
+        throw new Error("Invalid response from server");
+      }
+
+      console.log("Response data:", data);
 
       if (res.ok) {
         setStatus({ 
           type: "success", 
-          message: "✨ Message sent successfully! I'll get back to you soon." 
+          message: data.message || "✨ Message sent successfully! I'll get back to you soon." 
         });
         setForm({ name: "", email: "", message: "" });
       } else {
@@ -130,23 +159,29 @@ function Contact() {
       if (error.name === 'AbortError') {
         setStatus({ 
           type: "error", 
-          message: "Request timed out. Please try again or email me directly at sameerahmad723898@gmail.com" 
+          message: "⏱️ Request timed out. The server might be waking up. Please try again in a moment." 
         });
-      } else {
-        const subject = encodeURIComponent(`Message from ${form.name}`);
-        const body = encodeURIComponent(
-          `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-        );
-        const mailtoLink = `mailto:sameerahmad723898@gmail.com?subject=${subject}&body=${body}`;
-        
+      } else if (error.message === 'Failed to fetch') {
+        // Network error or CORS issue
         setStatus({ 
           type: "warning", 
-          message: "Server not responding. Opening your email client..." 
+          message: "⚠️ Unable to reach server. Opening your email client as backup..." 
         });
         
+        // Fallback to mailto
         setTimeout(() => {
+          const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
+          const body = encodeURIComponent(
+            `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+          );
+          const mailtoLink = `mailto:sameerahmad723898@gmail.com?subject=${subject}&body=${body}`;
           window.location.href = mailtoLink;
         }, 1500);
+      } else {
+        setStatus({ 
+          type: "error", 
+          message: `❌ ${error.message || "An unexpected error occurred. Please try again."}` 
+        });
       }
     } finally {
       setLoading(false);
@@ -260,11 +295,12 @@ function Contact() {
               className={`status-message ${status.type}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
             >
               {status.type === "success" ? (
                 <CheckCircle size={20} />
-              ) : status.type === "warning" ? (
-                <AlertCircle size={20} />
+              ) : status.type === "info" ? (
+                <Loader size={20} className="spin-icon" />
               ) : (
                 <AlertCircle size={20} />
               )}
