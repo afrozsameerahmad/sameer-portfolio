@@ -2283,6 +2283,11 @@ a {
   border: 1px solid rgba(0, 255, 213, 0.3);
   color: #00ffd5;
 }
+.status-message.info {
+  background: rgba(59, 130, 246, 0.1);
+  border-left: 3px solid #3b82f6;
+  color: #3b82f6;
+}
 
 .status-message.error {
   background: rgba(255, 107, 107, 0.1);

@@ -85,19 +85,31 @@ function Contact() {
     }
 
     setLoading(true);
-    setStatus({ type: "", message: "" });
+    setStatus({ 
+      type: "info", 
+      message: "⏳ Server is starting up (this may take 30-60 seconds)..." 
+    });
+
+    // Create abort controller for timeout
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
 
     try {
       const res = await fetch(
-        "https://sameer-portfolio-backend.onrender.com/api/contact/",
+        "https://sameer-portfolio-backend.onrender.com/api/contact",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(form),
+          signal: controller.signal,
         }
       );
+
+      clearTimeout(timeoutId);
+
+      const data = await res.json();
 
       if (res.ok) {
         setStatus({ 
@@ -106,33 +118,37 @@ function Contact() {
         });
         setForm({ name: "", email: "", message: "" });
       } else {
-        const errorData = await res.json().catch(() => ({}));
         setStatus({ 
           type: "error", 
-          message: errorData.message || "Failed to send message. Please try emailing directly." 
+          message: data.message || "Failed to send message. Please try again." 
         });
       }
     } catch (error) {
+      clearTimeout(timeoutId);
       console.error("Contact form error:", error);
       
-      // Fallback: Create a mailto link to open email client
-      const subject = encodeURIComponent(`Message from ${form.name}`);
-      const body = encodeURIComponent(
-        `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-      );
-      const mailtoLink = `mailto:sameerahmad723898@gmail.com?subject=${subject}&body=${body}`;
-      
-      setStatus({ 
-        type: "warning", 
-        message: "Server not responding. Opening your email client..." 
-      });
-      
-      // Open default email client after a short delay
-      setTimeout(() => {
-        window.location.href = mailtoLink;
-      }, 1500);
+      if (error.name === 'AbortError') {
+        setStatus({ 
+          type: "error", 
+          message: "Request timed out. Please try again or email me directly at sameerahmad723898@gmail.com" 
+        });
+      } else {
+        const subject = encodeURIComponent(`Message from ${form.name}`);
+        const body = encodeURIComponent(
+          `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+        );
+        const mailtoLink = `mailto:sameerahmad723898@gmail.com?subject=${subject}&body=${body}`;
+        
+        setStatus({ 
+          type: "warning", 
+          message: "Server not responding. Opening your email client..." 
+        });
+        
+        setTimeout(() => {
+          window.location.href = mailtoLink;
+        }, 1500);
+      }
     } finally {
-      // 🔥 CRITICAL FIX: This ALWAYS runs, even if there's an error
       setLoading(false);
     }
   };
