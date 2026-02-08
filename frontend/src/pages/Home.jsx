@@ -163,7 +163,7 @@ function Home() {
             variants={itemVariants}
           >
             <motion.a
-              href="#contact"
+              href="mailto:sameerahmad723898@gmail.com"
               className="btn btn-primary"
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
@@ -204,7 +204,7 @@ function Home() {
               </motion.a>
               
               <motion.a 
-                href="https://linkedin.com/in/sameer-ahmad-a65325335" 
+                href="https://www.linkedin.com/in/sameer-ahmad-a65325335" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="social-link"
