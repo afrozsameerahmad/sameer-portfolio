@@ -57,7 +57,7 @@ function Contact() {
       icon: Github,
       label: "GitHub",
       link: "https://github.com/afrozsameerahmad",
-      color: "#333"
+      color: "#fff"
     }
   ];
 
@@ -66,10 +66,24 @@ function Contact() {
       ...form,
       [e.target.name]: e.target.value,
     });
+    // Clear status when user starts typing
+    if (status.message) {
+      setStatus({ type: "", message: "" });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validation
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setStatus({ 
+        type: "error", 
+        message: "Please fill in all fields." 
+      });
+      return;
+    }
+
     setLoading(true);
     setStatus({ type: "", message: "" });
 
@@ -86,16 +100,41 @@ function Contact() {
       );
 
       if (res.ok) {
-        setStatus({ type: "success", message: "Message sent successfully! I'll get back to you soon." });
+        setStatus({ 
+          type: "success", 
+          message: "✨ Message sent successfully! I'll get back to you soon." 
+        });
         setForm({ name: "", email: "", message: "" });
       } else {
-        setStatus({ type: "error", message: "Something went wrong. Please try again." });
+        const errorData = await res.json().catch(() => ({}));
+        setStatus({ 
+          type: "error", 
+          message: errorData.message || "Failed to send message. Please try emailing directly." 
+        });
       }
-    } catch {
-      setStatus({ type: "error", message: "Server not responding. Please try emailing directly." });
+    } catch (error) {
+      console.error("Contact form error:", error);
+      
+      // Fallback: Create a mailto link to open email client
+      const subject = encodeURIComponent(`Message from ${form.name}`);
+      const body = encodeURIComponent(
+        `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+      );
+      const mailtoLink = `mailto:sameerahmad723898@gmail.com?subject=${subject}&body=${body}`;
+      
+      setStatus({ 
+        type: "warning", 
+        message: "Server not responding. Opening your email client..." 
+      });
+      
+      // Open default email client after a short delay
+      setTimeout(() => {
+        window.location.href = mailtoLink;
+      }, 1500);
+    } finally {
+      // 🔥 CRITICAL FIX: This ALWAYS runs, even if there's an error
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -144,6 +183,7 @@ function Contact() {
                 onChange={handleChange}
                 required
                 className="form-input"
+                disabled={loading}
               />
             </div>
 
@@ -158,6 +198,7 @@ function Contact() {
                 onChange={handleChange}
                 required
                 className="form-input"
+                disabled={loading}
               />
             </div>
 
@@ -172,19 +213,20 @@ function Contact() {
                 required
                 rows="6"
                 className="form-textarea"
+                disabled={loading}
               />
             </div>
 
             <motion.button
               type="submit"
-              className="submit-btn"
+              className={`submit-btn ${loading ? 'loading' : ''}`}
               disabled={loading}
               whileHover={{ scale: loading ? 1 : 1.02 }}
               whileTap={{ scale: loading ? 1 : 0.98 }}
             >
               {loading ? (
                 <>
-                  <Loader size={20} className="spin" />
+                  <Loader size={20} className="spin-icon" />
                   <span>Sending...</span>
                 </>
               ) : (
@@ -205,6 +247,8 @@ function Contact() {
             >
               {status.type === "success" ? (
                 <CheckCircle size={20} />
+              ) : status.type === "warning" ? (
+                <AlertCircle size={20} />
               ) : (
                 <AlertCircle size={20} />
               )}

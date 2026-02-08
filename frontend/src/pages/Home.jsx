@@ -10,7 +10,8 @@ import {
   Sparkles,
   Code2,
   Database,
-  Brain
+  Brain,
+  ChevronDown
 } from "lucide-react";
 
 import profileImg from "../assets/profile.png";
@@ -21,8 +22,8 @@ function Home() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: 0.15,
+        delayChildren: 0.2
       }
     }
   };
@@ -32,24 +33,30 @@ function Home() {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
     }
   };
 
-  const floatingIcons = [
-    { Icon: Code2, color: "#00ffd5", delay: 0, position: { top: "15%", left: "10%" } },
-    { Icon: Database, color: "#ff6b6b", delay: 1, position: { top: "70%", left: "15%" } },
-    { Icon: Brain, color: "#4ecdc4", delay: 2, position: { top: "40%", right: "8%" } },
-    { Icon: Sparkles, color: "#ffd93d", delay: 1.5, position: { top: "80%", right: "12%" } }
-  ];
+  const imageVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+    }
+  };
+
+  const floatingAnimation = {
+    y: [-10, 10, -10],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
 
   return (
-    <motion.section
-      className="home-section"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
+    <section className="home-section" id="home">
       <div className="home-container">
         
         {/* LEFT CONTENT */}
@@ -64,8 +71,8 @@ function Home() {
             className="home-badge"
             variants={itemVariants}
           >
-            <div className="badge-dot"></div>
-            <span>Available for opportunities</span>
+            <span className="badge-dot"></span>
+            <span className="badge-text">Available for Opportunities</span>
           </motion.div>
 
           {/* Main Heading */}
@@ -76,18 +83,18 @@ function Home() {
             </h1>
           </motion.div>
 
-          {/* Typewriter */}
+          {/* Typewriter Effect */}
           <motion.div 
             className="home-typewriter"
             variants={itemVariants}
           >
-            <h2>
+            <h2 className="typewriter-heading">
               <span className="typewriter-prefix">Aspiring</span>{" "}
               <span className="typewriter-text">
                 <Typewriter
                   words={[
                     "Data Scientist",
-                    "ML Engineer",
+                    "ML Engineer", 
                     "AI Enthusiast",
                     "Python Developer",
                     "Data Analyst"
@@ -95,9 +102,9 @@ function Home() {
                   loop={0}
                   cursor
                   cursorStyle="|"
-                  typeSpeed={80}
+                  typeSpeed={70}
                   deleteSpeed={50}
-                  delaySpeed={1500}
+                  delaySpeed={2000}
                 />
               </span>
             </h2>
@@ -108,33 +115,49 @@ function Home() {
             className="home-description"
             variants={itemVariants}
           >
-            First-year MCA student passionate about transforming data into 
-            actionable insights. Building real-world AI solutions through 
-            hands-on projects and continuous learning.
+            First-year MCA student in Data Science and AI with strong foundation 
+            in Python, machine learning, and data analysis. Passionate about 
+            building real-world, data-driven AI solutions through hands-on projects 
+            and continuous learning.
           </motion.p>
 
-          {/* Stats */}
+          {/* Stats Grid */}
           <motion.div 
             className="home-stats"
             variants={itemVariants}
           >
             <div className="stat-item">
-              <div className="stat-number">3</div>
-              <div className="stat-label">Internships</div>
+              <div className="stat-icon">
+                <Sparkles size={20} />
+              </div>
+              <div className="stat-content">
+                <div className="stat-number">3</div>
+                <div className="stat-label">Internships</div>
+              </div>
             </div>
-            <div className="stat-divider"></div>
+            
             <div className="stat-item">
-              <div className="stat-number">15+</div>
-              <div className="stat-label">Projects</div>
+              <div className="stat-icon">
+                <Code2 size={20} />
+              </div>
+              <div className="stat-content">
+                <div className="stat-number">10+</div>
+                <div className="stat-label">Projects</div>
+              </div>
             </div>
-            <div className="stat-divider"></div>
+            
             <div className="stat-item">
-              <div className="stat-number">20+</div>
-              <div className="stat-label">Skills</div>
+              <div className="stat-icon">
+                <Brain size={20} />
+              </div>
+              <div className="stat-content">
+                <div className="stat-number">15+</div>
+                <div className="stat-label">Skills</div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Buttons */}
+          {/* Action Buttons */}
           <motion.div 
             className="home-buttons"
             variants={itemVariants}
@@ -142,23 +165,23 @@ function Home() {
             <motion.a
               href="#contact"
               className="btn btn-primary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Mail size={20} />
+              <Mail size={18} />
               <span>Get In Touch</span>
               <ArrowRight size={18} className="btn-arrow" />
             </motion.a>
 
             <motion.a
               href="/resume.pdf"
-              download
+              download="Sameer_Ahmad_Resume.pdf"
               className="btn btn-secondary"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Download size={20} />
-              <span>Download CV</span>
+              <Download size={18} />
+              <span>Download Resume</span>
             </motion.a>
           </motion.div>
 
@@ -167,28 +190,39 @@ function Home() {
             className="home-social"
             variants={itemVariants}
           >
-            <a 
-              href="https://github.com/sameerahmad" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-link"
-            >
-              <Github size={20} />
-            </a>
-            <a 
-              href="https://linkedin.com/in/sameer-ahmad-a65325335" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="social-link"
-            >
-              <Linkedin size={20} />
-            </a>
-            <a 
-              href="mailto:sameerahmad723898@gmail.com"
-              className="social-link"
-            >
-              <Mail size={20} />
-            </a>
+            <p className="social-label">Connect with me:</p>
+            <div className="social-icons">
+              <motion.a 
+                href="https://github.com/afrozsameerahmad" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-link"
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Github size={20} />
+              </motion.a>
+              
+              <motion.a 
+                href="https://linkedin.com/in/sameer-ahmad-a65325335" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-link"
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Linkedin size={20} />
+              </motion.a>
+              
+              <motion.a 
+                href="mailto:sameerahmad723898@gmail.com"
+                className="social-link"
+                whileHover={{ y: -4 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Mail size={20} />
+              </motion.a>
+            </div>
           </motion.div>
 
           {/* Location */}
@@ -201,64 +235,79 @@ function Home() {
           </motion.div>
         </motion.div>
 
-        {/* RIGHT IMAGE */}
+        {/* RIGHT IMAGE SECTION */}
         <motion.div 
-          className="home-image-section"
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          className="home-image-wrapper"
+          variants={imageVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <div className="image-wrapper">
-            {/* Main Image */}
+          <div className="image-container">
+            {/* Profile Image */}
             <motion.div 
-              className="profile-image-container"
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+              className="profile-image-box"
+              animate={floatingAnimation}
             >
-              <img src={profileImg} alt="Sameer Ahmad" className="profile-image" />
-              
-              {/* Gradient Overlay */}
-              <div className="image-gradient"></div>
-              
-              {/* Border Animation */}
-              <div className="image-border"></div>
+              <img 
+                src={profileImg} 
+                alt="Sameer Ahmad - Data Scientist" 
+                className="profile-image" 
+              />
+              <div className="image-overlay"></div>
             </motion.div>
 
-            {/* Floating Elements */}
-            {floatingIcons.map(({ Icon, color, delay, position }, index) => (
-              <motion.div
-                key={index}
-                className="floating-icon"
-                style={{
-                  ...position,
-                  background: `${color}22`,
-                  borderColor: `${color}44`
-                }}
-                initial={{ scale: 0, rotate: -180 }}
-                animate={{ 
-                  scale: 1, 
-                  rotate: 0,
-                  y: [0, -10, 0]
-                }}
-                transition={{
-                  scale: { delay: delay * 0.3, duration: 0.5 },
-                  rotate: { delay: delay * 0.3, duration: 0.5 },
-                  y: {
-                    repeat: Infinity,
-                    duration: 2 + index * 0.5,
-                    ease: "easeInOut",
-                    delay: delay
-                  }
-                }}
-              >
-                <Icon size={20} color={color} strokeWidth={2} />
-              </motion.div>
-            ))}
+            {/* Floating Tech Icons */}
+            <motion.div
+              className="floating-element element-1"
+              animate={{ 
+                y: [0, -15, 0],
+                rotate: [0, 5, 0]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Code2 size={24} strokeWidth={2} />
+            </motion.div>
 
-            {/* Background Decorations */}
-            <div className="image-decoration decoration-circle-1"></div>
-            <div className="image-decoration decoration-circle-2"></div>
-            <div className="image-decoration decoration-circle-3"></div>
+            <motion.div
+              className="floating-element element-2"
+              animate={{ 
+                y: [0, 15, 0],
+                rotate: [0, -5, 0]
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5
+              }}
+            >
+              <Database size={24} strokeWidth={2} />
+            </motion.div>
+
+            <motion.div
+              className="floating-element element-3"
+              animate={{ 
+                y: [0, -20, 0],
+                rotate: [0, 10, 0]
+              }}
+              transition={{
+                duration: 4.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1
+              }}
+            >
+              <Brain size={24} strokeWidth={2} />
+            </motion.div>
+
+            {/* Background Shapes */}
+            <div className="bg-shape shape-1"></div>
+            <div className="bg-shape shape-2"></div>
+            <div className="bg-shape shape-3"></div>
           </div>
         </motion.div>
       </div>
@@ -266,22 +315,31 @@ function Home() {
       {/* Scroll Indicator */}
       <motion.div 
         className="scroll-indicator"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
       >
-        <div className="scroll-mouse">
-          <div className="scroll-wheel"></div>
-        </div>
-        <span className="scroll-text">Scroll to explore</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <ChevronDown size={24} />
+        </motion.div>
+        <span>Scroll to explore</span>
       </motion.div>
 
-      {/* Background Elements */}
+      {/* Background Grid */}
       <div className="home-bg-grid"></div>
-      <div className="home-bg-gradient-1"></div>
-      <div className="home-bg-gradient-2"></div>
-      <div className="home-bg-gradient-3"></div>
-    </motion.section>
+      
+      {/* Gradient Overlays */}
+      <div className="gradient-orb orb-1"></div>
+      <div className="gradient-orb orb-2"></div>
+      <div className="gradient-orb orb-3"></div>
+    </section>
   );
 }
 
