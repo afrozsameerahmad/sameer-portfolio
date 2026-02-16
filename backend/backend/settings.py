@@ -10,11 +10,8 @@ SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-secret-key")
 DEBUG = os.getenv("DEBUG", "False") == "True"  # Better env variable handling
 
 ALLOWED_HOSTS = [
-    "sameer-portfolio-backend.onrender.com",  # Your actual Render backend URL
-    "sameerahmad-portfolio.onrender.com",
-    "sameer-portfolio-eight-orcin.vercel.app",
-    "localhost",
-    "127.0.0.1",
+    "portfolio-backend.onrender.com",
+    "sameer-portfolio-backend.onrender.com",
 ]
 
 # APPS

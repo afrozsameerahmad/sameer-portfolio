@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { 
   BookOpen, 
   Calendar, 
@@ -23,7 +24,6 @@ function Blog() {
       date: "Feb 5, 2024",
       readTime: "8 min read",
       image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80",
-      link: "#",
       featured: true,
       tags: ["ML", "Beginner", "Tutorial"]
     },
@@ -37,7 +37,6 @@ function Blog() {
       date: "Jan 28, 2024",
       readTime: "12 min read",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-      link: "#",
       featured: true,
       tags: ["Python", "ML", "Deployment"]
     },
@@ -51,7 +50,6 @@ function Blog() {
       date: "Jan 15, 2024",
       readTime: "10 min read",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
-      link: "#",
       featured: false,
       tags: ["Career", "Roadmap", "Skills"]
     },
@@ -65,7 +63,6 @@ function Blog() {
       date: "Jan 10, 2024",
       readTime: "15 min read",
       image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
-      link: "#",
       featured: false,
       tags: ["Neural Networks", "Deep Learning", "AI"]
     },
@@ -79,7 +76,6 @@ function Blog() {
       date: "Dec 28, 2023",
       readTime: "7 min read",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-      link: "#",
       featured: false,
       tags: ["Data Cleaning", "Pandas", "Tips"]
     },
@@ -93,7 +89,6 @@ function Blog() {
       date: "Dec 15, 2023",
       readTime: "11 min read",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
-      link: "#",
       featured: false,
       tags: ["ARIMA", "Forecasting", "Python"]
     }
@@ -217,10 +212,10 @@ function Blog() {
                         <Clock size={14} />
                         {post.readTime}
                       </span>
-                      <a href={post.link} className="read-more">
+                      <Link to={`/blog/${post.id}`} className="read-more">
                         Read More
                         <ArrowRight size={16} className="arrow-icon" />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </motion.article>
@@ -287,10 +282,10 @@ function Blog() {
                       <Clock size={12} />
                       {post.readTime}
                     </span>
-                    <a href={post.link} className="card-link">
+                    <Link to={`/blog/${post.id}`} className="card-link">
                       Read
                       <ArrowRight size={14} />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </motion.article>

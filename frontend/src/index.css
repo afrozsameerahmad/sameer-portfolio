@@ -2412,8 +2412,6 @@ a.info-value:hover {
   font-size: 0.85rem;
   font-weight: 600;
   transition: all 0.3s ease;
-  
-
 }
 
 .social-link:hover {
@@ -4616,4 +4614,4 @@ a.info-value:hover {
   .certs-cta {
     padding: 32px 24px;
   }
-}
+}  
