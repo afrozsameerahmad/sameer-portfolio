@@ -1,344 +1,187 @@
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
-import { 
-  Download, 
-  Mail, 
-  Github, 
-  Linkedin, 
+import {
+  Download,
+  Mail,
+  Github,
+  Linkedin,
   MapPin,
   ArrowRight,
   Sparkles,
   Code2,
-  Database,
   Brain,
   ChevronDown
 } from "lucide-react";
 
 import profileImg from "../assets/profile.png";
 
+// ✅ ParticleCanvas removed — now lives globally in App.jsx
+
+const fade = (delay = 0) => ({
+  hidden:  { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay } }
+});
+
 function Home() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-    }
-  };
-
-  const imageVariants = {
-    hidden: { scale: 0.8, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-    }
-  };
-
-  const floatingAnimation = {
-    y: [-10, 10, -10],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
-
   return (
     <section className="home-section" id="home">
+
+      {/* Soft ambient blobs */}
+      <div className="home-ambient" aria-hidden="true">
+        <div className="amb amb-1" />
+        <div className="amb amb-2" />
+      </div>
+
       <div className="home-container">
-        
-        {/* LEFT CONTENT */}
-        <motion.div 
-          className="home-content"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Badge */}
-          <motion.div 
-            className="home-badge"
-            variants={itemVariants}
-          >
-            <span className="badge-dot"></span>
-            <span className="badge-text">Available for Opportunities</span>
+
+        {/* ── LEFT CONTENT ── */}
+        <div className="home-content">
+
+          <motion.div className="home-badge" variants={fade(0.1)} initial="hidden" animate="visible">
+            <span className="badge-dot" />
+            <span>Available for Opportunities</span>
           </motion.div>
 
-          {/* Main Heading */}
-          <motion.div variants={itemVariants}>
-            <h1 className="home-title">
-              Hi, I'm{" "}
-              <span className="name-gradient">Sameer Ahmad</span>
-            </h1>
+          <motion.h1 className="home-title" variants={fade(0.2)} initial="hidden" animate="visible">
+            Hi, I'm <span className="highlight">Sameer Ahmad</span>
+          </motion.h1>
+
+          <motion.div className="home-typewriter" variants={fade(0.3)} initial="hidden" animate="visible">
+            <span className="tw-prefix">Aspiring </span>
+            <span className="tw-word">
+              <Typewriter
+                words={["Data Scientist", "ML Engineer", "AI Enthusiast", "Python Developer", "Data Analyst"]}
+                loop={0}
+                cursor
+                cursorStyle="|"
+                typeSpeed={70}
+                deleteSpeed={45}
+                delaySpeed={2000}
+              />
+            </span>
           </motion.div>
 
-          {/* Typewriter Effect */}
-          <motion.div 
-            className="home-typewriter"
-            variants={itemVariants}
-          >
-            <h2 className="typewriter-heading">
-              <span className="typewriter-prefix">Aspiring</span>{" "}
-              <span className="typewriter-text">
-                <Typewriter
-                  words={[
-                    "Data Scientist",
-                    "ML Engineer", 
-                    "AI Enthusiast",
-                    "Python Developer",
-                    "Data Analyst"
-                  ]}
-                  loop={0}
-                  cursor
-                  cursorStyle="|"
-                  typeSpeed={70}
-                  deleteSpeed={50}
-                  delaySpeed={2000}
-                />
-              </span>
-            </h2>
-          </motion.div>
-
-          {/* Description */}
-          <motion.p 
-            className="home-description"
-            variants={itemVariants}
-          >
-            First-year MCA student in Data Science and AI with strong foundation 
-            in Python, machine learning, and data analysis. Passionate about 
-            building real-world, data-driven AI solutions through hands-on projects 
-            and continuous learning.
+          <motion.p className="home-desc" variants={fade(0.4)} initial="hidden" animate="visible">
+            First-year MCA student in Data Science and AI with a strong foundation
+            in Python, machine learning, and data analysis. Passionate about
+            building real-world, data-driven AI solutions.
           </motion.p>
 
-          {/* Stats Grid */}
-          <motion.div 
-            className="home-stats"
-            variants={itemVariants}
-          >
-            <div className="stat-item">
-              <div className="stat-icon">
-                <Sparkles size={20} />
-              </div>
-              <div className="stat-content">
-                <div className="stat-number">3</div>
-                <div className="stat-label">Internships</div>
+          <motion.div className="home-stats" variants={fade(0.5)} initial="hidden" animate="visible">
+            <div className="stat">
+              <Sparkles size={18} />
+              <div>
+                <strong>3</strong>
+                <span>Internships</span>
               </div>
             </div>
-            
-            <div className="stat-item">
-              <div className="stat-icon">
-                <Code2 size={20} />
-              </div>
-              <div className="stat-content">
-                <div className="stat-number">10+</div>
-                <div className="stat-label">Projects</div>
+            <div className="stat-divider" />
+            <div className="stat">
+              <Code2 size={18} />
+              <div>
+                <strong>10+</strong>
+                <span>Projects</span>
               </div>
             </div>
-            
-            <div className="stat-item">
-              <div className="stat-icon">
-                <Brain size={20} />
-              </div>
-              <div className="stat-content">
-                <div className="stat-number">15+</div>
-                <div className="stat-label">Skills</div>
+            <div className="stat-divider" />
+            <div className="stat">
+              <Brain size={18} />
+              <div>
+                <strong>15+</strong>
+                <span>Skills</span>
               </div>
             </div>
           </motion.div>
 
-          {/* Action Buttons */}
-          <motion.div 
-            className="home-buttons"
-            variants={itemVariants}
-          >
+          <motion.div className="home-buttons" variants={fade(0.6)} initial="hidden" animate="visible">
             <motion.a
               href="mailto:sameerahmad723898@gmail.com"
               className="btn btn-primary"
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
             >
-              <Mail size={18} />
-              <span>Get In Touch</span>
-              <ArrowRight size={18} className="btn-arrow" />
+              <Mail size={17} />
+              Get In Touch
+              <ArrowRight size={17} className="btn-arrow" />
             </motion.a>
-
             <motion.a
               href="/resume.pdf"
               download="Sameer_Ahmad_Resume.pdf"
-              className="btn btn-secondary"
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              className="btn btn-outline"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
             >
-              <Download size={18} />
-              <span>Download Resume</span>
+              <Download size={17} />
+              Resume
             </motion.a>
           </motion.div>
 
-          {/* Social Links */}
-          <motion.div 
-            className="home-social"
-            variants={itemVariants}
-          >
-            <p className="social-label">Connect with me:</p>
-            <div className="social-icons">
-              <motion.a 
-                href="https://github.com/afrozsameerahmad" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="social-link"
-                whileHover={{ y: -4 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Github size={20} />
-              </motion.a>
-              
-              <motion.a 
-                href="https://www.linkedin.com/in/sameer-ahmad-a65325335" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="social-link"
-                whileHover={{ y: -4 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Linkedin size={20} />
-              </motion.a>
-              
-              <motion.a 
-                href="mailto:sameerahmad723898@gmail.com"
-                className="social-link"
-                whileHover={{ y: -4 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Mail size={20} />
-              </motion.a>
-            </div>
+          <motion.div className="home-social" variants={fade(0.7)} initial="hidden" animate="visible">
+            <motion.a
+              href="https://github.com/afrozsameerahmad"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+              whileHover={{ y: -3 }}
+            >
+              <Github size={19} />
+            </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/sameer-ahmad-a65325335"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+              whileHover={{ y: -3 }}
+            >
+              <Linkedin size={19} />
+            </motion.a>
+            <motion.a
+              href="mailto:sameerahmad723898@gmail.com"
+              className="social-link"
+              whileHover={{ y: -3 }}
+            >
+              <Mail size={19} />
+            </motion.a>
+            <span className="social-sep" />
+            <span className="home-location">
+              <MapPin size={14} />
+              Lucknow, India
+            </span>
           </motion.div>
+        </div>
 
-          {/* Location */}
-          <motion.div 
-            className="home-location"
-            variants={itemVariants}
-          >
-            <MapPin size={16} />
-            <span>Lucknow, Uttar Pradesh, India</span>
-          </motion.div>
-        </motion.div>
-
-        {/* RIGHT IMAGE SECTION */}
-        <motion.div 
+        {/* ── RIGHT IMAGE ── */}
+        <motion.div
           className="home-image-wrapper"
-          variants={imageVariants}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
         >
-          <div className="image-container">
-            {/* Profile Image */}
-            <motion.div 
-              className="profile-image-box"
-              animate={floatingAnimation}
-            >
-              <img 
-                src={profileImg} 
-                alt="Sameer Ahmad - Data Scientist" 
-                className="profile-image" 
-              />
-              <div className="image-overlay"></div>
-            </motion.div>
+          <motion.div
+            className="profile-frame"
+            animate={{ y: [-6, 6, -6] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <img src={profileImg} alt="Sameer Ahmad" className="profile-img" />
+            <div className="frame-glow" />
+          </motion.div>
 
-            {/* Floating Tech Icons */}
-            <motion.div
-              className="floating-element element-1"
-              animate={{ 
-                y: [0, -15, 0],
-                rotate: [0, 5, 0]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <Code2 size={24} strokeWidth={2} />
-            </motion.div>
-
-            <motion.div
-              className="floating-element element-2"
-              animate={{ 
-                y: [0, 15, 0],
-                rotate: [0, -5, 0]
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5
-              }}
-            >
-              <Database size={24} strokeWidth={2} />
-            </motion.div>
-
-            <motion.div
-              className="floating-element element-3"
-              animate={{ 
-                y: [0, -20, 0],
-                rotate: [0, 10, 0]
-              }}
-              transition={{
-                duration: 4.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1
-              }}
-            >
-              <Brain size={24} strokeWidth={2} />
-            </motion.div>
-
-            {/* Background Shapes */}
-            <div className="bg-shape shape-1"></div>
-            <div className="bg-shape shape-2"></div>
-            <div className="bg-shape shape-3"></div>
-          </div>
+          <div className="tag tag-tl">Python · ML</div>
+          <div className="tag tag-br">Data Science</div>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div 
-        className="scroll-indicator"
+      {/* Scroll hint */}
+      <motion.div
+        className="scroll-hint"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+        transition={{ delay: 1.6, duration: 1 }}
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <ChevronDown size={24} />
+        <motion.div animate={{ y: [0, 6, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+          <ChevronDown size={20} />
         </motion.div>
-        <span>Scroll to explore</span>
       </motion.div>
-
-      {/* Background Grid */}
-      <div className="home-bg-grid"></div>
-      
-      {/* Gradient Overlays */}
-      <div className="gradient-orb orb-1"></div>
-      <div className="gradient-orb orb-2"></div>
-      <div className="gradient-orb orb-3"></div>
     </section>
   );
 }
