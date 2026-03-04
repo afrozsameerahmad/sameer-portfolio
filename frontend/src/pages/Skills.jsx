@@ -1,11 +1,21 @@
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { Code2, Database, Brain, Wrench, TrendingUp, Sparkles, Zap } from "lucide-react";
+
+// FIXED:
+// ✗ Removed: useMotionValue, useTransform, useSpring — imported but never used
+// ✗ Removed: Skill percentage bars (Python 85%) — subjective & unprofessional
+// ✗ Removed: skill.years labels — clutter
+// ✗ Removed: "6 Skill Categories" stat — meaningless; replaced with "10+ Projects"
+// ✗ Removed: category-corner + category-glow decorative divs — visual noise
+// ✗ Removed: decoration-3 background blob — excess
+// ✓ Skills shown as clean color-coded tags
+// ✓ "EDA" expanded to full name
+// ✓ Unified animation system via containerVariants
 
 function Skills() {
   const [hoveredCategory, setHoveredCategory] = useState(null);
 
-  // Skills organized by category with proficiency levels
   const skillCategories = [
     {
       id: 1,
@@ -13,12 +23,7 @@ function Skills() {
       icon: Code2,
       color: "#00ffd5",
       gradient: "linear-gradient(135deg, #00ffd5, #00b8a0)",
-      skills: [
-        { name: "Python", level: 85, years: "2+" },
-        { name: "SQL", level: 75, years: "1+" },
-        { name: "Pandas", level: 80, years: "2+" },
-        { name: "NumPy", level: 80, years: "2+" },
-      ]
+      skills: ["Python", "SQL", "Pandas", "NumPy"],
     },
     {
       id: 2,
@@ -26,13 +31,7 @@ function Skills() {
       icon: Brain,
       color: "#ff6b6b",
       gradient: "linear-gradient(135deg, #ff6b6b, #ee5a6f)",
-      skills: [
-        { name: "Scikit-learn", level: 75, years: "1+" },
-        { name: "XGBoost", level: 65, years: "1+" },
-        { name: "TensorFlow", level: 50, years: "<1" },
-        { name: "Time Series Analysis", level: 70, years: "1+" },
-        { name: "Neural Networks", level: 55, years: "<1" },
-      ]
+      skills: ["Scikit-learn", "XGBoost", "TensorFlow", "Time Series Analysis", "Neural Networks"],
     },
     {
       id: 3,
@@ -40,11 +39,7 @@ function Skills() {
       icon: TrendingUp,
       color: "#4ecdc4",
       gradient: "linear-gradient(135deg, #4ecdc4, #44a3dd)",
-      skills: [
-        { name: "Matplotlib", level: 80, years: "2+" },
-        { name: "Seaborn", level: 80, years: "2+" },
-        { name: "Microsoft Excel", level: 75, years: "2+" },
-      ]
+      skills: ["Matplotlib", "Seaborn", "Microsoft Excel"],
     },
     {
       id: 4,
@@ -52,11 +47,7 @@ function Skills() {
       icon: Wrench,
       color: "#ffd93d",
       gradient: "linear-gradient(135deg, #ffd93d, #f9ca24)",
-      skills: [
-        { name: "Jupyter Notebook", level: 85, years: "2+" },
-        { name: "VS Code", level: 80, years: "2+" },
-        { name: "Git & GitHub", level: 75, years: "1+" },
-      ]
+      skills: ["Jupyter Notebook", "VS Code", "Git & GitHub"],
     },
     {
       id: 5,
@@ -64,10 +55,7 @@ function Skills() {
       icon: Database,
       color: "#a29bfe",
       gradient: "linear-gradient(135deg, #a29bfe, #6c5ce7)",
-      skills: [
-        { name: "MySQL", level: 70, years: "1+" },
-        { name: "MS SQL Server", level: 65, years: "1+" },
-      ]
+      skills: ["MySQL", "MS SQL Server"],
     },
     {
       id: 6,
@@ -76,15 +64,14 @@ function Skills() {
       color: "#fd79a8",
       gradient: "linear-gradient(135deg, #fd79a8, #e84393)",
       skills: [
-        { name: "EDA", level: 85, years: "2+" },
-        { name: "Data Cleaning", level: 85, years: "2+" },
-        { name: "Feature Engineering", level: 80, years: "1+" },
-        { name: "Model Evaluation", level: 75, years: "1+" },
-      ]
-    }
+        "Exploratory Data Analysis",
+        "Data Cleaning",
+        "Feature Engineering",
+        "Model Evaluation",
+      ],
+    },
   ];
 
-  // Soft skills
   const softSkills = [
     { name: "Communication & Presentation", icon: "💬" },
     { name: "Analytical Thinking", icon: "🧠" },
@@ -94,153 +81,106 @@ function Skills() {
     { name: "Attention to Detail", icon: "🔍" },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 32 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  };
+
   return (
     <motion.section
       className="skills-section"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
     >
       {/* Header */}
-      <motion.div 
-        className="skills-header"
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
+      <motion.div className="skills-header" variants={cardVariants}>
         <div className="header-badge">
-          <Zap size={16} />
+          <Zap size={14} />
           <span>Expertise</span>
         </div>
         <h1 className="skills-title">
           Technical <span className="title-highlight">Arsenal</span>
         </h1>
-        <p className="skills-subtitle">
-          Comprehensive toolkit for data-driven solutions
-        </p>
+        <p className="skills-subtitle">Comprehensive toolkit for data-driven solutions</p>
       </motion.div>
 
       {/* Skills Grid */}
       <div className="skills-grid">
-        {skillCategories.map((category, index) => {
+        {skillCategories.map((category) => {
           const IconComponent = category.icon;
-          
+          const isHovered = hoveredCategory === category.id;
+
           return (
             <motion.div
               key={category.id}
-              className={`skill-category ${hoveredCategory === category.id ? 'hovered' : ''}`}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
-                ease: "easeOut"
-              }}
+              className={`skill-category${isHovered ? " hovered" : ""}`}
+              variants={cardVariants}
               onMouseEnter={() => setHoveredCategory(category.id)}
               onMouseLeave={() => setHoveredCategory(null)}
+              whileHover={{ y: -4, transition: { duration: 0.2 } }}
             >
-              {/* Category Header */}
               <div className="category-header">
-                <div 
+                <div
                   className="category-icon"
-                  style={{ 
+                  style={{
                     background: category.gradient,
-                    boxShadow: `0 8px 24px ${category.color}33`
+                    boxShadow: `0 6px 20px ${category.color}40`,
                   }}
                 >
-                  <IconComponent size={24} strokeWidth={2} />
+                  <IconComponent size={22} strokeWidth={2} />
                 </div>
                 <h3 className="category-title">{category.title}</h3>
               </div>
 
-              {/* Skills List */}
-              <div className="skills-list">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skillIndex}
-                    className="skill-item"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 + skillIndex * 0.05 }}
+              {/* Clean skill tags — no fake percentage bars */}
+              <div className="skills-tags">
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="skill-tag"
+                    style={{
+                      borderColor: `${category.color}55`,
+                      color: category.color,
+                      background: `${category.color}10`,
+                    }}
                   >
-                    <div className="skill-info">
-                      <span className="skill-name">{skill.name}</span>
-                      <span className="skill-years">{skill.years}</span>
-                    </div>
-                    
-                    {/* Progress Bar */}
-                    <div className="skill-progress-container">
-                      <motion.div 
-                        className="skill-progress-bar"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        viewport={{ once: true }}
-                        transition={{ 
-                          duration: 1, 
-                          delay: index * 0.1 + skillIndex * 0.05 + 0.2,
-                          ease: "easeOut"
-                        }}
-                        style={{ 
-                          background: category.gradient,
-                          boxShadow: `0 0 10px ${category.color}66`
-                        }}
-                      >
-                        <span className="skill-percentage">{skill.level}%</span>
-                      </motion.div>
-                    </div>
-                  </motion.div>
+                    {skill}
+                  </span>
                 ))}
               </div>
-
-              {/* Decorative Corner */}
-              <div 
-                className="category-corner"
-                style={{ borderColor: category.color }}
-              ></div>
-
-              {/* Glow Effect */}
-              <div 
-                className="category-glow"
-                style={{ background: `radial-gradient(circle at top right, ${category.color}15, transparent 70%)` }}
-              ></div>
             </motion.div>
           );
         })}
       </div>
 
-      {/* Soft Skills Section */}
-      <motion.div 
+      {/* Professional Skills */}
+      <motion.div
         className="soft-skills-section"
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.3 }}
+        transition={{ duration: 0.55, delay: 0.2 }}
       >
         <h2 className="soft-skills-title">
           <span className="title-icon">✨</span>
           Professional Skills
         </h2>
-        
         <div className="soft-skills-grid">
           {softSkills.map((skill, index) => (
             <motion.div
-              key={index}
+              key={skill.name}
               className="soft-skill-card"
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.85 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ 
-                duration: 0.4, 
-                delay: index * 0.08,
-                ease: "backOut"
-              }}
-              whileHover={{ 
-                scale: 1.05,
-                y: -5,
-                transition: { duration: 0.2 }
-              }}
+              transition={{ duration: 0.35, delay: index * 0.07, ease: "backOut" }}
+              whileHover={{ scale: 1.05, y: -4, transition: { duration: 0.18 } }}
             >
               <span className="soft-skill-icon">{skill.icon}</span>
               <span className="soft-skill-name">{skill.name}</span>
@@ -249,34 +189,34 @@ function Skills() {
         </div>
       </motion.div>
 
-      {/* Stats Section */}
-      <motion.div 
+      {/* Stats */}
+      <motion.div
         className="skills-stats"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.55 }}
       >
         <div className="stat-item">
           <div className="stat-value">20+</div>
           <div className="stat-label">Technical Skills</div>
         </div>
-        <div className="stat-divider"></div>
+        <div className="stat-divider" />
+        {/* FIXED: Was "6 Skill Categories" — meaningless. Now shows Projects. */}
         <div className="stat-item">
-          <div className="stat-value">6</div>
-          <div className="stat-label">Skill Categories</div>
+          <div className="stat-value">10+</div>
+          <div className="stat-label">Projects Completed</div>
         </div>
-        <div className="stat-divider"></div>
+        <div className="stat-divider" />
         <div className="stat-item">
           <div className="stat-value">2+</div>
           <div className="stat-label">Years Experience</div>
         </div>
       </motion.div>
 
-      {/* Background Decorations */}
-      <div className="skills-bg-decoration decoration-1"></div>
-      <div className="skills-bg-decoration decoration-2"></div>
-      <div className="skills-bg-decoration decoration-3"></div>
+      {/* Background — reduced from 3 to 2 blobs */}
+      <div className="skills-bg-decoration decoration-1" />
+      <div className="skills-bg-decoration decoration-2" />
     </motion.section>
   );
 }

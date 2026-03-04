@@ -1,14 +1,10 @@
 import { motion } from "framer-motion";
-import { 
-  Heart, 
-  Github, 
-  Linkedin, 
-  Mail,
-  ArrowUp,
-  Sparkles,
-  Code2
-} from "lucide-react";
+import { Heart, Github, Linkedin, Mail, ArrowUp, Sparkles, Code2 } from "lucide-react";
 import "./Footer.css";
+
+// FIXED:
+// ✗ Removed: { name: "Home", href: "/home" } — route is "/" not "/home". Was a 404.
+// ✓ All internal links use React Router paths that match App.jsx routes exactly
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,64 +17,61 @@ function Footer() {
     {
       title: "Quick Links",
       links: [
-        { name: "Home", href: "/home" },
+        { name: "Home", href: "/" },           // FIXED: was "/home" → 404
         { name: "About", href: "/about" },
         { name: "Projects", href: "/projects" },
-        { name: "Contact", href: "/contact" }
-      ]
+        { name: "Contact", href: "/contact" },
+      ],
     },
     {
       title: "Social",
       links: [
-        { 
-          name: "GitHub", 
+        {
+          name: "GitHub",
           href: "https://github.com/afrozsameerahmad",
-          icon: Github
+          icon: Github,
         },
-        { 
-          name: "LinkedIn", 
+        {
+          name: "LinkedIn",
           href: "https://linkedin.com/in/sameer-ahmad-a65325335",
-          icon: Linkedin
+          icon: Linkedin,
         },
-        { 
-          name: "Email", 
+        {
+          name: "Email",
           href: "mailto:sameerahmad723898@gmail.com",
-          icon: Mail
-        }
-      ]
-    }
+          icon: Mail,
+        },
+      ],
+    },
   ];
 
   return (
     <footer className="footer">
       <div className="footer-container">
-        
-        {/* Top Section */}
+        {/* Top */}
         <div className="footer-top">
-          
-          {/* Brand Section */}
-          <motion.div 
+          {/* Brand */}
+          <motion.div
             className="footer-brand"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
             <div className="footer-logo">
               <Sparkles size={24} className="logo-icon" />
               <span className="logo-text">Sameer Ahmad</span>
             </div>
             <p className="footer-tagline">
-              Aspiring Data Scientist building AI-powered solutions
-              for real-world problems.
+              Aspiring Data Scientist building AI-powered solutions for real-world problems.
             </p>
             <div className="footer-badge">
-              <div className="badge-dot"></div>
+              <div className="badge-dot" />
               <span>Available for opportunities</span>
             </div>
           </motion.div>
 
-          {/* Links Sections */}
+          {/* Links */}
           {footerLinks.map((section, idx) => (
             <motion.div
               key={section.title}
@@ -86,18 +79,19 @@ function Footer() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
             >
               <h3 className="footer-section-title">{section.title}</h3>
               <ul className="footer-links-list">
-                {section.links.map((link, index) => {
+                {section.links.map((link) => {
                   const Icon = link.icon;
+                  const isExternal = link.href.startsWith("http") || link.href.startsWith("mailto");
                   return (
-                    <li key={index}>
-                      <a 
+                    <li key={link.name}>
+                      <a
                         href={link.href}
-                        target={link.href.startsWith('http') ? "_blank" : undefined}
-                        rel={link.href.startsWith('http') ? "noopener noreferrer" : undefined}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
                         className="footer-link"
                       >
                         {Icon && <Icon size={16} />}
@@ -109,31 +103,28 @@ function Footer() {
               </ul>
             </motion.div>
           ))}
-
         </div>
 
-        {/* Divider */}
-        <div className="footer-divider"></div>
+        <div className="footer-divider" />
 
-        {/* Bottom Section */}
+        {/* Bottom */}
         <div className="footer-bottom">
-          <motion.div 
+          <motion.div
             className="footer-copyright"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             <p>
-              © {currentYear} <span className="copyright-name">Sameer Ahmad</span>. 
-              All rights reserved.
+              © {currentYear} <span className="copyright-name">Sameer Ahmad</span>. All rights
+              reserved.
             </p>
             <p className="footer-made-with">
               Made with <Heart size={14} className="heart-icon" /> and <Code2 size={14} /> in India
             </p>
           </motion.div>
 
-          {/* Scroll to Top Button */}
           <motion.button
             className="scroll-top-btn"
             onClick={scrollToTop}
@@ -142,17 +133,15 @@ function Footer() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             aria-label="Scroll to top"
           >
             <ArrowUp size={20} />
           </motion.button>
         </div>
-
       </div>
 
-      {/* Background Decoration */}
-      <div className="footer-bg-gradient"></div>
+      <div className="footer-bg-gradient" />
     </footer>
   );
 }
