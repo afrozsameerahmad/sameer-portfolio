@@ -15,11 +15,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-// FIXED:
-// ✗ Removed: image-placeholder showing "SA" initials — profile.png exists, use it!
-// ✗ Removed: image-decoration rings (decoration-1/2/3) — too much visual noise
-// ✓ Real profile image now shown in About hero
-// ✓ Animation pattern simplified — no conflicting initial/animate on nested elements
 
 import profileImg from "../assets/profile.png";
 
@@ -27,7 +22,7 @@ function About() {
   const [activeTab, setActiveTab] = useState("overview");
 
   const stats = [
-    { icon: Briefcase, label: "Internships", value: "3", color: "#00ffd5" },
+    { icon: Briefcase, label: "Internships", value: "4", color: "#00ffd5" },
     { icon: Code, label: "Projects", value: "10+", color: "#ff6b6b" },
     { icon: Database, label: "Technologies", value: "20+", color: "#4ecdc4" },
     { icon: Award, label: "Certifications", value: "4+", color: "#ffd93d" },
@@ -46,6 +41,7 @@ function About() {
       degree: "Bachelor of Computer Application",
       institution: "Pinnacle Degree College, Hyderabad",
       affiliated: "Affiliated to Osmania University",
+      percentage: "76%",
       period: "July 2022 – June 2025",
       status: "completed",
     },
@@ -68,6 +64,8 @@ function About() {
         "Feature Engineering",
         "Statistical Analysis",
         "Predictive Modeling",
+        "Data Visualization",
+        "Data Interpretation",
         "Model Evaluation (MAE, RMSE, MAPE)",
       ],
     },
@@ -78,6 +76,8 @@ function About() {
         "Time Series Forecasting (ARIMA, Prophet)",
         "Regression & Classification",
         "XGBoost & Ensemble Methods",
+        "Hyperparameter Tuning",
+        "Cross Validation",
         "Neural Networks (TensorFlow)",
         "Model Deployment",
       ],
@@ -89,6 +89,8 @@ function About() {
         "SQL (MySQL, MS SQL Server)",
         "Jupyter Notebook & VS Code",
         "Git & GitHub",
+        "Streamlit",
+        "REST APIs",
         "Matplotlib & Seaborn",
         "Microsoft Excel (Advanced)",
       ],
@@ -282,7 +284,7 @@ function About() {
                       { label: "Current Role", value: "MCA Student" },
                       { label: "Specialization", value: "Data Science & AI" },
                       { label: "Location", value: "Lucknow, UP, India" },
-                      { label: "Experience", value: "3 Internships" },
+                      { label: "Experience", value: "4 Internships" },
                       { label: "Languages", value: "Python, SQL" },
                     ].map((fact) => (
                       <div key={fact.label} className="fact-item">

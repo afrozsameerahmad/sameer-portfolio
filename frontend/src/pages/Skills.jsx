@@ -23,7 +23,7 @@ function Skills() {
       icon: Code2,
       color: "#00ffd5",
       gradient: "linear-gradient(135deg, #00ffd5, #00b8a0)",
-      skills: ["Python", "SQL", "Pandas", "NumPy"],
+      skills: ["Python", "SQL", "Pandas", "NumPy","OOP","Data Structures","API Integration"],
     },
     {
       id: 2,
@@ -31,7 +31,7 @@ function Skills() {
       icon: Brain,
       color: "#ff6b6b",
       gradient: "linear-gradient(135deg, #ff6b6b, #ee5a6f)",
-      skills: ["Scikit-learn", "XGBoost", "TensorFlow", "Time Series Analysis", "Neural Networks"],
+      skills: ["Scikit-learn", "XGBoost", "TensorFlow","Deep Learning", "Time Series Analysis", "Neural Networks","Hyperparameter Tuning","Model Deployment"],
     },
     {
       id: 3,
@@ -39,7 +39,7 @@ function Skills() {
       icon: TrendingUp,
       color: "#4ecdc4",
       gradient: "linear-gradient(135deg, #4ecdc4, #44a3dd)",
-      skills: ["Matplotlib", "Seaborn", "Microsoft Excel"],
+      skills: ["Matplotlib", "Seaborn", "Plotly","Power BI","Microsoft Excel"],
     },
     {
       id: 4,
@@ -47,7 +47,7 @@ function Skills() {
       icon: Wrench,
       color: "#ffd93d",
       gradient: "linear-gradient(135deg, #ffd93d, #f9ca24)",
-      skills: ["Jupyter Notebook", "VS Code", "Git & GitHub"],
+      skills: ["Jupyter Notebook", "VS Code", "Git & GitHub","Docker","Streamlit","Linux"],
     },
     {
       id: 5,
@@ -55,7 +55,7 @@ function Skills() {
       icon: Database,
       color: "#a29bfe",
       gradient: "linear-gradient(135deg, #a29bfe, #6c5ce7)",
-      skills: ["MySQL", "MS SQL Server"],
+      skills: ["MySQL", "MS SQL Server","PostgreSQL"],
     },
     {
       id: 6,
@@ -68,18 +68,33 @@ function Skills() {
         "Data Cleaning",
         "Feature Engineering",
         "Model Evaluation",
+        "Statistical Analysis",
+        "A/B Testing",
+        "Cross Validation"
       ],
+    },
+    {
+      id: 7,
+      title: "MLOps & Deployment",
+      icon: Sparkles,
+      color: "#a29bfe",
+      gradient: "linear-gradient(135deg, #a29bfe, #6c5ce7)",
+      skills: ["Streamlit", "Model Deployment","REST APIs","Docker","CI/CD Basics"],
     },
   ];
 
   const softSkills = [
-    { name: "Communication & Presentation", icon: "💬" },
-    { name: "Analytical Thinking", icon: "🧠" },
-    { name: "Problem-Solving", icon: "🎯" },
-    { name: "Leadership & Collaboration", icon: "🤝" },
-    { name: "Adaptability", icon: "🔄" },
-    { name: "Attention to Detail", icon: "🔍" },
-  ];
+  { name: "Communication & Presentation", icon: "💬" },
+  { name: "Analytical Thinking", icon: "🧠" },
+  { name: "Problem-Solving", icon: "🎯" },
+  { name: "Leadership & Collaboration", icon: "🤝" },
+  { name: "Adaptability", icon: "🔄" },
+  { name: "Attention to Detail", icon: "🔍" },
+  { name: "Critical Thinking", icon: "🧩" },
+  { name: "Data-Driven Decision Making", icon: "📊" },
+  { name: "Research & Continuous Learning", icon: "📚" },
+  { name: "Time Management", icon: "⏳" },
+];
 
   const containerVariants = {
     hidden: { opacity: 0 },

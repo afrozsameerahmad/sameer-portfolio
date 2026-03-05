@@ -19,9 +19,8 @@ function Experience() {
       id: 1,
       role: "Data Science Intern",
       company: "Minematics",
-      // FIXED: "Recent" replaced with real period
-      period: "Jan 2025 – Mar 2025",
-      location: "Remote",
+      period: "Mar 2025 – Apr 2025",
+      location: "On-site",
       type: "Internship",
       achievements: [
         "Collected, cleaned, and preprocessed structured datasets using Python (Pandas, NumPy)",
@@ -37,7 +36,7 @@ function Experience() {
       id: 2,
       role: "Data Science Intern",
       company: "Flora Edze",
-      period: "Oct 2024 – Dec 2024",
+      period: "Mar 2025 – May 2025",
       location: "Project-Based",
       type: "Project Internship",
       achievements: [
@@ -54,7 +53,7 @@ function Experience() {
       id: 3,
       role: "Data Science Intern",
       company: "Cognifyz Technologies",
-      period: "Jul 2024 – Sep 2024",
+      period: "Apr 2025 – May 2025",
       location: "Remote",
       type: "Remote Internship",
       achievements: [

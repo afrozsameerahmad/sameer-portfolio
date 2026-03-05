@@ -15,8 +15,6 @@ import {
 
 import profileImg from "../assets/profile.png";
 
-// ✅ ParticleCanvas removed — now lives globally in App.jsx
-
 const fade = (delay = 0) => ({
   hidden:  { opacity: 0, y: 18 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1], delay } }
@@ -71,7 +69,7 @@ function Home() {
             <div className="stat">
               <Sparkles size={18} />
               <div>
-                <strong>3</strong>
+                <strong>4</strong>
                 <span>Internships</span>
               </div>
             </div>
@@ -87,7 +85,7 @@ function Home() {
             <div className="stat">
               <Brain size={18} />
               <div>
-                <strong>15+</strong>
+                <strong>20+</strong>
                 <span>Skills</span>
               </div>
             </div>

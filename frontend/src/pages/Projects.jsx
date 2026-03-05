@@ -1,29 +1,14 @@
-import { motion } from "framer-motion";
-import { Github, ExternalLink, Code2, Star, Eye, TrendingUp, Activity, Globe } from "lucide-react";
-
-import salesImg from "../assets/sales_forecast.png";
-import mlImg from "../assets/ml_deploy.png";
-// Use mlImg as portfolio thumbnail until you add a real screenshot
-// To use a real screenshot: add portfolio_preview.png to src/assets/ and import it here
-const portfolioImg = mlImg;
-
-/*
- ═══════════════════════════════════════════════════════════
-  VERIFIED REPOS — github.com/afrozsameerahmad
- ═══════════════════════════════════════════════════════════
-  ✅ FloraEdze-sales-forecasting-project  → Jupyter Notebook (no live)
-  ✅ flora-edge-app                        → Streamlit app (LIVE)
-  ✅ Cognifyz_Internship_tasks             → HTML + Jupyter
-  ✅ Fitabase-Fitness-Sleep-Analysis       → Jupyter Notebook
-  ✅ sameer-portfolio                      → React + Python (Vercel LIVE)
- ═══════════════════════════════════════════════════════════
-  ⚠️  REPLACE the flora-edge-app live link below with your
-      actual Streamlit URL once you have it, e.g.:
-      "https://flora-edge-app.streamlit.app"
- ═══════════════════════════════════════════════════════════
-*/
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Github, ExternalLink, Code2, Star, Eye, Activity, Globe, ChevronDown, ChevronUp } from "lucide-react";
 
 function Projects() {
+  const [expanded, setExpanded] = useState({});
+
+  const toggleExpand = (id) => {
+    setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
+
   const projects = [
     {
       id: 1,
@@ -31,7 +16,7 @@ function Projects() {
       desc: "Interactive Streamlit web app that predicts future e-commerce sales — built and deployed live as part of the Flora Edze internship.",
       longDesc:
         "Users can input parameters and get real-time sales forecasts powered by ARIMA and Random Forest models. Includes data visualizations, trend analysis, and a clean UI for business decision-making.",
-      img: salesImg,
+      img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
       github: "https://github.com/afrozsameerahmad/flora-edge-app",
       live: "https://floraedze-sales-forecasting-project-9wphj6fstwtquwh5sdltsn.streamlit.app/",
       tags: ["Python", "Streamlit", "ARIMA", "Random Forest", "Pandas", "Deployed"],
@@ -47,7 +32,7 @@ function Projects() {
       desc: "Beginner ML project predicting future sales from historical data using ARIMA and Random Forest — the analysis notebook behind the Streamlit app.",
       longDesc:
         "Covers data cleaning, exploratory analysis, time series decomposition, and model evaluation to generate actionable sales trend insights.",
-      img: salesImg,
+      img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80",
       github: "https://github.com/afrozsameerahmad/FloraEdze-sales-forecasting-project",
       live: null,
       tags: ["Python", "ARIMA", "Random Forest", "Pandas", "Jupyter Notebook"],
@@ -63,7 +48,7 @@ function Projects() {
       desc: "Complete data science task set from Cognifyz Technologies — restaurant data EDA, geospatial analysis, cuisine analysis, and feature engineering.",
       longDesc:
         "Multi-level project covering data cleaning, missing value handling, cuisine distribution, location-based restaurant insights, and advanced feature engineering on real-world datasets.",
-      img: mlImg,
+      img: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
       github: "https://github.com/afrozsameerahmad/Cognifyz_Internship_tasks",
       live: null,
       tags: ["Python", "Pandas", "NumPy", "EDA", "Feature Engineering", "Visualization"],
@@ -79,7 +64,7 @@ function Projects() {
       desc: "Analyzes Fitbit daily activity and sleep data to understand physical activity patterns, sleep quality, and health trends.",
       longDesc:
         "In-depth EDA covering steps, calories, active minutes, distance, and sleep patterns — with rich visualizations to surface meaningful health insights from wearable tracker data.",
-      img: salesImg,
+      img: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
       github: "https://github.com/afrozsameerahmad/Fitabase-Fitness-Sleep-Analysis",
       live: null,
       tags: ["Python", "Pandas", "Matplotlib", "Seaborn", "EDA", "Health Analytics"],
@@ -95,7 +80,7 @@ function Projects() {
       desc: "Fully responsive, animated personal portfolio site built with React and a Python backend — live on Vercel.",
       longDesc:
         "Features smooth Framer Motion animations, dark-themed UI, certifications page, projects showcase, and a working contact form powered by a Python backend.",
-      img: portfolioImg,
+      img: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
       github: "https://github.com/afrozsameerahmad/sameer-portfolio",
       live: "https://sameer-portfolio-eight-orcin.vercel.app",
       tags: ["React", "Python", "JavaScript", "CSS", "Framer Motion", "Vercel"],
@@ -108,9 +93,9 @@ function Projects() {
   ];
 
   const stats = [
-    { value: "5",   label: "Projects",       icon: <Code2 size={18} /> },
-    { value: "2",   label: "Live Deployments", icon: <Globe size={18} /> },
-    { value: "20+", label: "Skills Used",     icon: <Activity size={18} /> },
+    { value: "5",   label: "Projects",         icon: <Code2 size={18} /> },
+    { value: "2",   label: "Live Deployments",  icon: <Globe size={18} /> },
+    { value: "20+", label: "Skills Used",       icon: <Activity size={18} /> },
   ];
 
   return (
@@ -157,144 +142,149 @@ function Projects() {
 
       {/* ── Projects Grid ── */}
       <div className="projects-grid">
-        {projects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            className={`project-card ${project.featured ? "featured" : ""}`}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            whileHover={{ y: -6 }}
-          >
-            {project.featured && (
-              <div className="featured-badge">
-                <Star size={13} fill="currentColor" />
-                <span>Featured</span>
-              </div>
-            )}
+        {projects.map((project, index) => {
+          const isExpanded = expanded[project.id];
+          const visibleTags = isExpanded ? project.tags : project.tags.slice(0, 3);
 
-            {/* Image */}
-            <div className="project-image-container">
-              <img src={project.img} alt={project.title} className="project-image" />
-              <div
-                className="image-overlay"
-                style={{ background: `linear-gradient(135deg, ${project.color}22, transparent)` }}
-              />
-
-              {/* Live badge on image if deployed */}
-              {project.live && (
-                <div className="project-live-badge" style={{ color: project.color, borderColor: `${project.color}55` }}>
-                  <span className="live-dot" style={{ background: project.color }} />
-                  Live
+          return (
+            <motion.div
+              key={project.id}
+              className={`project-card ${project.featured ? "featured" : ""}`}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              whileHover={{ y: -4 }}
+              layout
+            >
+              {project.featured && (
+                <div className="featured-badge">
+                  <Star size={13} fill="currentColor" />
+                  <span>Featured</span>
                 </div>
               )}
 
-              {/* Org tag */}
-              <div
-                className="project-org-tag"
-                style={{
-                  color: project.color,
-                  borderColor: `${project.color}44`,
-                  background: "rgba(0,0,0,0.78)",
-                }}
-              >
-                {project.org}
-              </div>
-
-              {/* Hover action buttons */}
-              <div className="project-actions">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="action-btn"
-                  title="View on GitHub"
-                >
-                  <Github size={20} />
-                </a>
+              {/* Image */}
+              <div className="project-image-container">
+                <img src={project.img} alt={project.title} className="project-image" />
+                <div
+                  className="image-overlay"
+                  style={{ background: `linear-gradient(135deg, ${project.color}22, transparent)` }}
+                />
                 {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="action-btn"
-                    title={project.liveLabel || "Live Demo"}
-                  >
-                    <Globe size={20} />
-                  </a>
+                  <div className="project-live-badge" style={{ color: project.color, borderColor: `${project.color}55` }}>
+                    <span className="live-dot" style={{ background: project.color }} />
+                    Live
+                  </div>
                 )}
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="project-content">
-              {/* Language pill */}
-              <div className="project-lang">
-                <span className="lang-dot" style={{ background: project.color }} />
-                {project.lang}
-              </div>
-
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-desc">{project.desc}</p>
-              <p className="project-long-desc">{project.longDesc}</p>
-
-              <div className="project-tags">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="project-tag"
-                    style={{
-                      borderColor: `${project.color}55`,
-                      color: project.color,
-                      background: `${project.color}0d`,
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <div className="project-links">
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="project-link"
+                <div
+                  className="project-org-tag"
+                  style={{ color: project.color, borderColor: `${project.color}44`, background: "rgba(0,0,0,0.78)" }}
                 >
-                  <Github size={16} />
-                  <span>View Code</span>
-                </a>
-                {project.live && (
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="project-link primary"
-                    style={{ background: `${project.color}22`, color: project.color, borderColor: `${project.color}44` }}
-                  >
-                    <Eye size={16} />
-                    <span>{project.liveLabel || "Live Demo"}</span>
+                  {project.org}
+                </div>
+                <div className="project-actions">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="action-btn" title="View on GitHub">
+                    <Github size={20} />
                   </a>
-                )}
+                  {project.live && (
+                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="action-btn" title={project.liveLabel || "Live Demo"}>
+                      <Globe size={20} />
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
 
-            <div
-              className="project-decoration"
-              style={{ background: `${project.color}0d` }}
-            />
-          </motion.div>
-        ))}
+              {/* Content */}
+              <div className="project-content">
+                <div className="project-lang">
+                  <span className="lang-dot" style={{ background: project.color }} />
+                  {project.lang}
+                </div>
+
+                <h3 className="project-title">{project.title}</h3>
+
+                {/* Short desc — always visible */}
+                <p className="project-desc">{project.desc}</p>
+
+                {/* Long desc — only when expanded */}
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.p
+                      className="project-long-desc"
+                      key="long"
+                      initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                      animate={{ opacity: 1, height: "auto", marginTop: 6 }}
+                      exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                      transition={{ duration: 0.28 }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      {project.longDesc}
+                    </motion.p>
+                  )}
+                </AnimatePresence>
+
+                {/* Tags — 3 default, all on expand */}
+                <div className="project-tags">
+                  {visibleTags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="project-tag"
+                      style={{ borderColor: `${project.color}55`, color: project.color, background: `${project.color}0d` }}
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                  {!isExpanded && project.tags.length > 3 && (
+                    <span
+                      className="project-tag"
+                      onClick={() => toggleExpand(project.id)}
+                      style={{ borderColor: `${project.color}55`, color: project.color, background: `${project.color}0d`, cursor: "pointer" }}
+                    >
+                      +{project.tags.length - 3} more
+                    </span>
+                  )}
+                </div>
+
+                {/* Read More / Show Less */}
+                <button
+                  className="expand-btn"
+                  onClick={() => toggleExpand(project.id)}
+                  style={{ color: project.color, borderColor: `${project.color}44` }}
+                >
+                  {isExpanded ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
+                  <span>{isExpanded ? "Show Less" : "Read More"}</span>
+                </button>
+
+                {/* Action links */}
+                <div className="project-links">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-link">
+                    <Github size={16} />
+                    <span>View Code</span>
+                  </a>
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link primary"
+                      style={{ background: `${project.color}22`, color: project.color, borderColor: `${project.color}44` }}
+                    >
+                      <Eye size={16} />
+                      <span>{project.liveLabel || "Live Demo"}</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div className="project-decoration" style={{ background: `${project.color}0d` }} />
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* ── View All on GitHub ── */}
-      <motion.div
-        className="view-all-container"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-      >
+      <motion.div className="view-all-container" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
         <a
           href="https://github.com/afrozsameerahmad?tab=repositories"
           target="_blank"
