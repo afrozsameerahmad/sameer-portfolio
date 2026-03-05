@@ -5,24 +5,24 @@ from corsheaders.defaults import default_headers
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ─── SECURITY ────────────────────────────────────────────────────────────────
-# FIXED: Raise a clear error if SECRET_KEY is not set in production
-#        instead of silently using an insecure fallback.
 SECRET_KEY = os.environ.get("SECRET_KEY")
 if not SECRET_KEY:
     import warnings
     warnings.warn(
-        "SECRET_KEY environment variable is not set. "
-        "Using a default key — NEVER deploy this to production!",
+        "SECRET_KEY environment variable is not set. Using a default key — NEVER deploy this to production!",
         RuntimeWarning,
     )
     SECRET_KEY = "django-insecure-dev-only-key-change-before-deploying"
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-# FIXED: Added localhost/127.0.0.1 so local runserver works without DEBUG=True
+# ─── ALLOWED HOSTS ───────────────────────────────────────────────────────────
+# FIX: Added the ACTUAL Render URL shown in deployment logs:
+#      "Available at https://sameerahmad-portfolio.onrender.com"
 ALLOWED_HOSTS = [
-    "portfolio-backend.onrender.com",
-    "sameer-portfolio-backend.onrender.com",
+    "sameerahmad-portfolio.onrender.com",       # ✅ ACTUAL live URL (was missing!)
+    "sameer-portfolio-backend.onrender.com",    # old name (keep for safety)
+    "portfolio-backend.onrender.com",           # old name (keep for safety)
     "localhost",
     "127.0.0.1",
 ]
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
 # ─── MIDDLEWARE ───────────────────────────────────────────────────────────────
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # Must be first
+    "corsheaders.middleware.CorsMiddleware",  # Must be FIRST
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -103,14 +103,12 @@ DATABASES = {
 }
 
 # ─── EMAIL ────────────────────────────────────────────────────────────────────
-# ADDED: Email backend so you get notified when someone fills the contact form.
-# Set EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in your Render environment variables.
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")       # Your Gmail address
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "") # App password (not regular password)
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 CONTACT_NOTIFICATION_EMAIL = os.getenv("CONTACT_NOTIFICATION_EMAIL", EMAIL_HOST_USER)
 
@@ -124,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # ─── I18N ─────────────────────────────────────────────────────────────────────
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "Asia/Kolkata"  # FIXED: Was UTC — set to your actual timezone
+TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
 USE_TZ = True
 
