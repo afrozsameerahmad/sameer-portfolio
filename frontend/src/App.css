@@ -1,7 +1,4 @@
-/* App.css */
-/* FIXED: Removed all default Vite boilerplate (logo-spin, logo hover, .card, .read-the-docs)
-   — none of these classes are used anywhere in the portfolio. */
-
+ 
 #root {
   min-height: 100vh;
   display: flex;
