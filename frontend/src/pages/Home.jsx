@@ -48,7 +48,7 @@ function Home() {
             <span className="tw-prefix">Aspiring </span>
             <span className="tw-word">
               <Typewriter
-                words={["Data Scientist", "ML Engineer", "AI Enthusiast", "Python Developer", "Data Analyst"]}
+                words={["AI Engineer", "ML Engineer", "AI Enthusiast", "Python Developer", "Data Analyst"]}
                 loop={0}
                 cursor
                 cursorStyle="|"
@@ -60,9 +60,9 @@ function Home() {
           </motion.div>
 
           <motion.p className="home-desc" variants={fade(0.4)} initial="hidden" animate="visible">
-            First-year MCA student in Data Science and AI with a strong foundation
-            in Python, machine learning, and data analysis. Passionate about
-            building real-world, data-driven AI solutions.
+            First-year MCA student in Data Science and AI on the path to becoming an
+            AI Engineer, with a strong foundation in Python, machine learning, and data
+            analysis. Passionate about building real-world, data-driven AI solutions.
           </motion.p>
 
           <motion.div className="home-stats" variants={fade(0.5)} initial="hidden" animate="visible">

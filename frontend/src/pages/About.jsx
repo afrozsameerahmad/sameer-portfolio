@@ -114,7 +114,7 @@ function About() {
         >
           <div className="hero-badge">
             <TrendingUp size={16} />
-            <span>Aspiring Data Scientist</span>
+            <span>Aspiring AI Engineer</span>
           </div>
 
           <h1 className="hero-title">

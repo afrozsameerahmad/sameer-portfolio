@@ -63,7 +63,7 @@ function Footer() {
               <span className="logo-text">Sameer Ahmad</span>
             </div>
             <p className="footer-tagline">
-              Aspiring Data Scientist building AI-powered solutions for real-world problems.
+              Aspiring AI Engineer building AI-powered solutions for real-world problems.
             </p>
             <div className="footer-badge">
               <div className="badge-dot" />
