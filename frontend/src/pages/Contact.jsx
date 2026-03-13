@@ -9,7 +9,8 @@ import {
   Github,
   CheckCircle,
   AlertCircle,
-  Loader
+  Loader,
+  Download
 } from "lucide-react";
 
 function Contact() {
@@ -61,6 +62,18 @@ function Contact() {
       label: "GitHub",
       link: "https://github.com/afrozsameerahmad",
       color: "#fff"
+    },
+    {
+      icon: Mail,
+      label: "Email",
+      link: "mailto:sameer.ahmad7869200@gmail.com",
+      color: "#00ffd5"
+    },
+    {
+      icon: Download,
+      label: "Resume",
+      link: "/resume.pdf",
+      color: "#ff6b6b"
     }
   ];
 
@@ -349,8 +362,8 @@ function Contact() {
           </div>
 
           {/* Social Links */}
-          <div className="social-section">
-            <h3 className="social-title">Connect on Social Media</h3>
+          <div className="social-section" id="connect-with-me">
+            <h3 className="social-title">Connect with Me</h3>
             <div className="social-links">
               {socialLinks.map((social, index) => {
                 const IconComponent = social.icon;

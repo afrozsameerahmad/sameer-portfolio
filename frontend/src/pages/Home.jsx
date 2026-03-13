@@ -44,20 +44,9 @@ function Home() {
             Hi, I'm <span className="highlight">Sameer Ahmad</span>
           </motion.h1>
 
-          <motion.div className="home-typewriter" variants={fade(0.3)} initial="hidden" animate="visible">
-            <span className="tw-prefix">Aspiring </span>
-            <span className="tw-word">
-              <Typewriter
-                words={["AI Engineer", "ML Engineer", "AI Enthusiast", "Python Developer", "Data Analyst"]}
-                loop={0}
-                cursor
-                cursorStyle="|"
-                typeSpeed={70}
-                deleteSpeed={45}
-                delaySpeed={2000}
-              />
-            </span>
-          </motion.div>
+          <motion.h2 className="home-tagline" variants={fade(0.3)} initial="hidden" animate="visible" style={{ fontSize: "1.5rem", fontWeight: "600", marginTop: "0.5rem", marginBottom: "1rem", color: "var(--text-secondary)" }}>
+            Aspiring AI Engineer <span style={{ opacity: 0.5 }}>|</span> <span className="highlight">Available for Opportunities</span>
+          </motion.h2>
 
           <motion.p className="home-desc" variants={fade(0.4)} initial="hidden" animate="visible">
             First-year MCA student in Data Science and AI on the path to becoming an

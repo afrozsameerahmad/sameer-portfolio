@@ -237,22 +237,7 @@ function About() {
                 <h2 className="section-title">Professional Summary</h2>
                 <div className="text-content">
                   <p>
-                    First-year MCA student with a strong foundation in <strong>Python</strong> and
-                    data science tools including <strong>Pandas, NumPy, and Scikit-learn</strong>.
-                    Actively learning machine learning concepts, data preprocessing, feature
-                    engineering, and model development.
-                  </p>
-                  <p>
-                    Experienced in <strong>exploratory data analysis (EDA)</strong>, data
-                    visualization using <strong>Matplotlib and Seaborn</strong>, and model
-                    evaluation. Passionate about building real-world, data-driven AI solutions
-                    through hands-on practice and continuous learning.
-                  </p>
-                  <p>
-                    Completed internships at <strong>Minematics</strong>,{" "}
-                    <strong>Flora Edze</strong>, and <strong>Cognifyz Technologies</strong>, working
-                    on real datasets including e-commerce sales forecasting, restaurant data
-                    analysis, and machine learning model development.
+                    I'm a first-year MCA student specializing in Data Science and AI, passionate about building real-world, data-driven solutions. With a strong foundation in Python and machine learning, I enjoy transforming data into actionable insights and intelligent systems. I'm actively seeking opportunities to apply my skills and grow as an AI Engineer.
                   </p>
                 </div>
 
