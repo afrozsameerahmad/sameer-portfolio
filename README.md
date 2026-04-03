@@ -111,16 +111,7 @@ You can personalize this portfolio by updating:
 - Resume button target
 
 ---
-
-## 📸 Screenshot
-
-Add your homepage screenshot in the repo (example: `assets/portfolio-home.png`) and reference it:
-
-```md
-![Portfolio Preview](assets/portfolio-home.png)
-```
-
----
+ 
 
 ## 🤝 Connect
 
