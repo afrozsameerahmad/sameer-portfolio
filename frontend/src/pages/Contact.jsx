@@ -37,8 +37,8 @@ function Contact() {
     {
       icon: Phone,
       label: "Phone",
-      value: "+91-7238982622",
-      link: "tel:+917238982622",
+      value: "+91-7238981622",
+      link: "tel:+917238981622",
       color: "#ff6b6b"
     },
     {

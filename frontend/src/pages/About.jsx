@@ -127,9 +127,9 @@ function About() {
           </p>
 
           <div className="hero-contact">
-            <a href="tel:+917238982622" className="contact-item">
+            <a href="tel:+917238981622" className="contact-item">
               <Phone size={16} />
-              <span>+91-7238982622</span>
+              <span>+91-7238981622</span>
             </a>
             <a href="mailto:sameerahmad723898@gmail.com" className="contact-item">
               <Mail size={16} />
